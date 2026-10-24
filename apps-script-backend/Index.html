@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1">
+
+<base target="_top">
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f3f5f7;
+  color:#17202a;
+}
+
+.container{
+  max-width:720px;
+  margin:auto;
+  padding:12px;
+}
+
+.card{
+  background:#ffffff;
+  border-radius:16px;
+  padding:16px;
+  margin-bottom:12px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
+
+h2{
+  margin:0 0 8px 0;
+}
+
+h3{
+  margin-top:20px;
+}
+
+.header{
+  background:#1261a0;
+  color:white;
+}
+
+.header .muted{
+  color:#e5eef7;
+}
+
+.muted{
+  color:#667085;
+  font-size:13px;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  margin-top:12px;
+  margin-bottom:6px;
+}
+
+select,
+input,
+textarea{
+  width:100%;
+  padding:12px;
+  border:1px solid #ccd3da;
+  border-radius:10px;
+  font-size:16px;
+  background:white;
+}
+
+input[readonly]{
+  background:#f1f3f5;
+  font-weight:bold;
+}
+
+textarea{
+  min-height:80px;
+  resize:vertical;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.kpi-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:15px;
+}
+
+.kpi{
+  background:#eef5ff;
+  border-radius:12px;
+  padding:14px;
+  text-align:center;
+}
+
+.kpi b{
+  display:block;
+  font-size:24px;
+  margin-bottom:4px;
+}
+
+button{
+  width:100%;
+  border:0;
+  border-radius:10px;
+  padding:14px;
+  margin-top:14px;
+  font-size:16px;
+  font-weight:bold;
+  background:#1261a0;
+  color:white;
+  cursor:pointer;
+}
+
+button:disabled{
+  background:#9aa4ad;
+  cursor:not-allowed;
+}
+
+.success{
+  color:#137333;
+  font-weight:bold;
+}
+
+.error{
+  color:#b3261e;
+  font-weight:bold;
+}
+
+.hidden{
+  display:none;
+}
+
+.warning-box{
+  background:#fff7e6;
+  border:1px solid #ffd666;
+  border-radius:10px;
+  padding:10px;
+  margin-top:10px;
+  font-size:13px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:12px;
+}
+
+th,
+td{
+  padding:8px 5px;
+  border-bottom:1px solid #eeeeee;
+  text-align:left;
+}
+
+.admin-title{
+  color:#1261a0;
+}
+
+.small{
+  font-size:12px;
+}
+
+@media(max-width:500px){
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .kpi-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .container{
+    padding:8px;
+  }
+
+  .card{
+    padding:14px;
+  }
+
+}
+
+
+/* Battery Audit corporate theme aligned with DG Fault Tracker admin */
+body{font-family:Arial,Helvetica,sans-serif;background:#F3F6FB;color:#1F2937}
+.container{max-width:1600px;padding:20px;margin:auto}
+.card{border-radius:14px;box-shadow:0 3px 15px rgba(15,23,42,.07);border:1px solid #E5E7EB}
+.header{background:linear-gradient(135deg,#123B73,#1769AA);padding:20px 24px;box-shadow:0 3px 12px rgba(0,0,0,.16)}
+.header h2{font-size:24px;letter-spacing:.2px;margin:0 0 7px}
+.header .muted{color:#E5EEF7;font-size:13px}
+button{transition:filter .15s ease,transform .15s ease}
+button:hover{filter:brightness(1.04)}
+button:active{transform:translateY(1px)}
+.admin-tabs{display:flex;gap:8px;overflow-x:auto;padding:12px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;margin:14px 0;position:sticky;top:0;z-index:30}
+.admin-tab{width:auto;white-space:nowrap;margin:0;background:#f1f5f9;color:#334155;padding:11px 16px;border-radius:9px;font-size:13px}
+.admin-tab.active{background:#1769AA;color:#fff}
+.admin-view{display:none}.admin-view.active{display:block}
+.admin-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:14px 0}
+.admin-kpi{background:#fff;border:1px solid #e5e7eb;border-left:5px solid #1769AA;border-radius:13px;padding:16px;min-height:104px;box-shadow:0 3px 15px rgba(15,23,42,.05)}
+.admin-kpi .k-label{font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.45px}
+.admin-kpi .k-value{font-size:29px;font-weight:800;margin-top:8px;color:#123B73}
+.admin-toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:12px 0}
+.admin-toolbar input,.admin-toolbar select{width:auto;min-width:170px;flex:1;padding:11px;border:1px solid #d1d5db;border-radius:9px;font-size:14px}
+.admin-btn{width:auto;margin:0;padding:10px 14px;border-radius:8px;background:#1769AA;color:white;font-size:13px}
+.admin-btn.secondary{background:#eaf2fb;color:#123B73;border:1px solid #cbdcf0}
+.admin-table-wrap{overflow:auto;border:1px solid #e5e7eb;border-radius:10px;background:#fff}
+.admin-table{width:100%;border-collapse:collapse;min-width:760px;font-size:12px}
+.admin-table th{position:sticky;top:0;background:#123B73;color:#fff;font-size:11px;text-transform:uppercase;letter-spacing:.25px;white-space:nowrap}
+.admin-table td,.admin-table th{padding:10px 9px;border-bottom:1px solid #e5e7eb;text-align:left;vertical-align:top}
+.admin-table tbody tr:hover{background:#f8fbff}
+.pill{display:inline-block;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:700;background:#e8f5e9;color:#137333}
+.pill.warn{background:#fff4dd;color:#9a6700}.pill.bad{background:#fee2e2;color:#b91c1c}.pill.neutral{background:#eef2f7;color:#475569}
+.admin-chart-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.chart-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;min-width:0}
+.chart-row{display:grid;grid-template-columns:minmax(100px,1fr) 3fr 42px;gap:9px;align-items:center;margin:10px 0;font-size:12px}
+.chart-track{height:9px;background:#edf2f7;border-radius:99px;overflow:hidden}.chart-fill{height:100%;background:#1769AA;border-radius:99px}
+.admin-empty{padding:24px;text-align:center;color:#6B7280}
+.admin-note{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;padding:11px;border-radius:9px;font-size:12px;margin:10px 0}
+@media(max-width:800px){.admin-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.admin-chart-grid{grid-template-columns:1fr}.container{padding:10px}.header{padding:17px}.header h2{font-size:20px}}
+@media(max-width:480px){.admin-kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.admin-kpi{padding:12px;min-height:88px}.admin-kpi .k-value{font-size:24px}.admin-toolbar input,.admin-toolbar select{min-width:100%;width:100%}.admin-btn{flex:1}.admin-tabs{top:0;padding:8px}}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<div class="card header">
+
+  <h2>🔋 BM Audit App</h2>
+
+  <div id="technicianName"
+       class="muted">
+
+       Loading Technician...
+
+  </div>
+
+</div>
+
+
+
+<!-- =========================
+     AUDIT FORM
+========================= -->
+
+<div id="auditSection"
+     class="card hidden">
+
+
+  <h3>BM Site Audit</h3>
+
+
+  <!-- SITE -->
+
+  <label>
+    Site ID
+  </label>
+
+  <select id="site"
+          onchange="siteChanged()">
+
+    <option value="">
+      Select Site
+    </option>
+
+  </select>
+
+
+
+  <!-- FIXED MASTER DATA -->
+
+  <div class="grid">
+
+    <div>
+
+      <label>
+        NE BM
+      </label>
+
+      <input id="ne"
+             readonly>
+
+    </div>
+
+
+    <div>
+
+      <label>
+        BM Make
+      </label>
+
+      <input id="make"
+             readonly>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- PHYSICAL -->
+
+  <label>
+    Physical BM
+  </label>
+
+  <select id="physical">
+
+  </select>
+
+
+
+  <!-- ZABBIX -->
+
+  <label>
+    Zabbix Visible BM
+  </label>
+
+  <select id="visible">
+
+  </select>
+
+
+
+  <!-- STATUS -->
+
+  <h3>
+    BM Status
+  </h3>
+
+
+  <div class="grid">
+
+
+    <div>
+
+      <label>
+        Faulty BM at Site
+      </label>
+
+      <select id="faulty"></select>
+
+    </div>
+
+
+    <div>
+
+      <label>
+        BM Sent to WH
+      </label>
+
+      <select id="wh"></select>
+
+    </div>
+
+
+    <div>
+
+      <label>
+        BM Theft
+      </label>
+
+      <select id="theft"></select>
+
+    </div>
+
+
+    <div>
+
+      <label>
+        BM in Site Down
+      </label>
+
+      <select id="siteDown"></select>
+
+    </div>
+
+
+    <div>
+
+      <label>
+        BM in Degrow
+      </label>
+
+      <select id="degrow"></select>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="grid">
+
+
+    <div>
+
+      <label>
+        SMPS Issue
+      </label>
+
+      <select id="smpsIssue"></select>
+
+    </div>
+
+
+    <div>
+
+      <label>
+        SMPS Upgradation
+      </label>
+
+      <select id="smpsUpgrade"></select>
+
+    </div>
+
+
+    <div>
+
+      <label>
+        BM OEM
+      </label>
+
+      <select id="bmOem"></select>
+
+    </div>
+
+
+    <div>
+
+      <label>
+        SMPS OEM
+      </label>
+
+      <select id="smpsOem"></select>
+
+    </div>
+
+
+    <div>
+
+      <label>
+        ISP Issue
+      </label>
+
+      <select id="ispIssue"></select>
+
+    </div>
+
+
+  </div>
+
+
+
+  <!-- KPI -->
+
+  <div class="kpi-grid">
+
+
+    <div class="kpi">
+
+      <b id="workable">
+        0
+      </b>
+
+      Workable BM
+
+    </div>
+
+
+    <div class="kpi">
+
+      <b id="missing">
+        0
+      </b>
+
+      Missing BM
+
+    </div>
+
+
+  </div>
+
+
+
+  <!-- VALIDATION -->
+
+  <div id="validationMessage"
+       class="muted"
+       style="margin-top:12px;">
+
+  </div>
+
+
+
+  <!-- SUBMIT -->
+
+  <button id="submitButton"
+        onclick="submitAudit()">
+
+SUBMIT BM AUDIT
+
+</button>
+
+<div id="submitMessage"
+     style="
+       display:none;
+       margin-top:10px;
+       padding:10px;
+       background:#e8f5e9;
+       color:#188038;
+       border-radius:8px;
+       font-weight:bold;
+       text-align:center;
+     ">
+</div>
+
+</div>
+
+
+
+<!-- =========================
+     RECENT AUDIT
+========================= -->
+
+<div id="recentSection"
+     class="card hidden">
+
+  
+    <h3>
+  Audit History
+</h3>
+
+
+  <div id="recentBody">
+
+  </div>
+
+</div>
+
+
+
+<!-- =========================
+     ADMIN PANEL
+========================= -->
+
+<div id="adminSection"
+     class="card hidden">
+
+  <h2 class="admin-title">
+    🔐 Admin Panel
+  </h2>
+
+
+  <label>
+    Admin PIN
+  </label>
+
+  <input id="adminPin"
+         type="password"
+         placeholder="Enter Admin PIN">
+
+
+  <button onclick="adminLogin()">
+    OPEN ADMIN
+  </button>
+
+
+  <div id="adminBody"
+       style="margin-top:15px;">
+
+  </div>
+
+</div>
+
+
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
+<script>
+
+
+/* =================================
+   GLOBAL VARIABLES
+================================= */
+
+let TOKEN = "<?= token ?>";
+let APP_DATA = null;
+
+let ADMIN_PIN = "";
+let ADMIN_DATA = null;
+let ADMIN_ACTIVE_VIEW = "overview";
+
+
+
+/* =================================
+   CREATE 0-10 DROPDOWNS
+================================= */
+
+function createNumberOptions(id){
+
+  const select =
+    document.getElementById(id);
+
+  select.innerHTML = "";
+
+  for(let i = 0; i <= 10; i++){
+
+    const option =
+      document.createElement("option");
+
+    option.value = i;
+
+    option.textContent = i;
+
+    select.appendChild(option);
+
+  }
+
+}
+
+
+/* =================================
+   INITIALIZE ALL DROPDOWNS
+================================= */
+
+const numberFields = [
+
+  "physical",
+  "visible",
+  "faulty",
+  "wh",
+  "theft",
+  "siteDown",
+  "degrow",
+
+  "smpsIssue",
+  "smpsUpgrade",
+  "bmOem",
+  "smpsOem",
+  "ispIssue"
+
+];
+
+
+numberFields.forEach(
+  createNumberOptions
+);
+
+
+
+/* =================================
+   LOAD APPLICATION
+================================= */
+
+function initializeApp(){
+
+  if(
+    window.location.search
+      .includes("admin=1")
+  ){
+
+    document
+      .getElementById("adminSection")
+      .classList
+      .remove("hidden");
+
+  }
+
+
+  // Admin mode must work without a technician token. Technician mode still
+  // requires the per-technician token and keeps its assigned-site validation.
+  const isAdminMode = new URLSearchParams(window.location.search).get("admin") === "1";
+  if(isAdminMode){
+    const techName = document.getElementById("technicianName");
+    if(techName) techName.textContent = "Admin Control Center";
+    return;
+  }
+
+  if(!TOKEN){
+    document.getElementById("technicianName").textContent = "Technician link missing.";
+    return;
+  }
+
+
+  google.script.run
+
+    .withSuccessHandler(
+      loadAppData
+    )
+
+    .withFailureHandler(
+      function(error){
+
+        document
+          .getElementById("technicianName")
+          .textContent =
+          error.message;
+
+      }
+
+    )
+
+    .getAppData(TOKEN);
+
+}
+
+
+
+/* =================================
+   LOAD TECHNICIAN DATA
+================================= */
+
+function loadAppData(data){
+
+  APP_DATA = data;
+
+
+  document
+    .getElementById("technicianName")
+    .textContent =
+    "Technician: " +
+    data.technician;
+
+
+  document
+    .getElementById("auditSection")
+    .classList
+    .remove("hidden");
+
+
+  const siteSelect =
+    document
+      .getElementById("site");
+
+
+  siteSelect.innerHTML =
+    '<option value="">Select Site</option>';
+
+
+  data.sites.forEach(
+    function(site){
+
+      const option =
+        document.createElement("option");
+
+      option.value =
+        site.site;
+
+      option.textContent =
+        site.site;
+
+      siteSelect.appendChild(
+        option
+      );
+
+    }
+  );
+
+
+  renderRecentAudits(
+    data.recent
+  );
+
+}
+
+
+
+/* =================================
+   SITE CHANGE
+================================= */
+
+function siteChanged(){
+
+  const siteId =
+    document
+      .getElementById("site")
+      .value;
+
+
+  const record =
+    APP_DATA.sites.find(
+      function(site){
+
+        return site.site === siteId;
+
+      }
+    );
+
+
+  if(!record){
+
+    document
+      .getElementById("ne")
+      .value = "";
+
+    document
+      .getElementById("make")
+      .value = "";
+
+    return;
+
+  }
+
+
+  document
+    .getElementById("ne")
+    .value =
+    record.ne;
+
+
+  document
+    .getElementById("make")
+    .value =
+    record.make;
+
+}
+
+
+
+/* =================================
+   GET NUMERIC VALUES
+================================= */
+
+function getValues(){
+
+  const result = {};
+
+
+  numberFields.forEach(
+    function(field){
+
+      result[field] =
+        Number(
+          document
+            .getElementById(field)
+            .value || 0
+        );
+
+    }
+  );
+
+
+  return result;
+
+}
+
+
+
+/* =================================
+   CALCULATE WORKABLE
+================================= */
+
+function calculateTotals(){
+
+  const n =
+    getValues();
+
+
+  const workable =
+
+    n.smpsIssue
+    +
+    n.smpsUpgrade
+    +
+    n.bmOem
+    +
+    n.smpsOem
+    +
+    n.ispIssue;
+
+
+  const statusTotal =
+  n.faulty
+  + n.wh
+  + n.theft
+  + n.siteDown
+  + n.degrow;
+
+
+  const missing =
+  Math.max(
+    0,
+    n.physical -
+    statusTotal -
+    workable -
+    n.visible
+  );
+
+
+  document
+    .getElementById("workable")
+    .textContent =
+    workable;
+
+
+  document
+    .getElementById("missing")
+    .textContent =
+    missing;
+
+
+  const statusOK =
+  statusTotal + workable + n.visible === n.physical;
+
+
+
+
+  const message =
+    document
+      .getElementById(
+        "validationMessage"
+      );
+
+
+  const button =
+    document
+      .getElementById(
+        "submitButton"
+      );
+
+
+  if(statusOK){
+
+    message.textContent =
+      "✓ BM totals are valid.";
+
+    message.className =
+      "success";
+
+    button.disabled =
+      false;
+
+  }else{
+
+    message.textContent =
+      "⚠ Fault/status + Workable + Visible BM, Physical BM se zyada nahi ho sakte.";
+
+    message.className =
+      "error";
+
+    button.disabled =
+      true;
+
+  }
+
+}
+
+
+
+/* =================================
+   AUTO CALCULATION
+================================= */
+
+numberFields.forEach(
+  function(field){
+
+    document
+      .getElementById(field)
+      .addEventListener(
+        "change",
+        calculateTotals
+      );
+
+  }
+);
+
+
+
+/* =================================
+   SUBMIT AUDIT
+================================= */
+
+function submitAudit(){
+
+  const site =
+    document
+      .getElementById("site")
+      .value;
+
+
+  if(!site){
+
+    alert(
+      "Please select Site ID."
+    );
+
+    return;
+
+  }
+
+
+  const values =
+    getValues();
+
+
+  
+
+  const payload = {
+
+    site: site,
+
+  
+
+    physical:
+      values.physical,
+
+    visible:
+      values.visible,
+
+    faulty:
+      values.faulty,
+
+
+    wh:
+      values.wh,
+
+    theft:
+      values.theft,
+
+    siteDown:
+      values.siteDown,
+
+    degrow:
+      values.degrow,
+
+    smpsIssue:
+      values.smpsIssue,
+
+    smpsUpgrade:
+      values.smpsUpgrade,
+
+    bmOem:
+      values.bmOem,
+
+    smpsOem:
+      values.smpsOem,
+
+    ispIssue:
+      values.ispIssue
+
+  };
+
+
+  const button =
+    document
+      .getElementById(
+        "submitButton"
+      );
+
+
+  button.disabled =
+    true;
+
+
+  button.textContent =
+    "Submitting...";
+
+
+google.script.run
+  .withSuccessHandler(function(response) {
+const msg = document.getElementById("submitMessage");
+
+msg.textContent = "✓ BM Audit submitted successfully.";
+msg.style.display = "block";
+
+    renderRecentAudits(response.recent);
+
+    resetForm();
+
+    button.disabled = false;
+    button.textContent = "SUBMIT BM AUDIT";
+
+    calculateTotals();
+
+  })
+  .withFailureHandler(function(error) {
+
+    alert("Submit Error: " + error.message);
+
+    button.disabled = false;
+    button.textContent = "SUBMIT BM AUDIT";
+
+    calculateTotals();
+
+  })
+  .submitAudit(TOKEN, payload);
+}
+
+/* =================================
+   RESET FORM
+================================= */
+
+function resetForm(){
+
+  document
+    .getElementById("site")
+    .value = "";
+
+
+  document
+    .getElementById("ne")
+    .value = "";
+
+
+  document
+    .getElementById("make")
+    .value = "";
+
+
+
+
+  numberFields.forEach(
+    function(field){
+
+      document
+        .getElementById(field)
+        .value = 0;
+
+    }
+  );
+
+
+  calculateTotals();
+
+}
+
+
+
+/* =================================
+   RECENT AUDITS
+================================= */
+
+function renderRecentAudits(data){
+
+  const section =
+    document.getElementById("recentSection");
+
+  const body =
+    document.getElementById("recentBody");
+
+  section.classList.remove("hidden");
+
+  if(
+    !data ||
+    data.length === 0
+  ){
+    body.innerHTML =
+      '<div class="muted">No audit submitted yet.</div>';
+    return;
+  }
+
+  let html =
+    "<table>" +
+
+    "<tr>" +
+    "<th>Date</th>" +
+    "<th>Site</th>" +
+    "<th>Physical BM</th>" +
+    "<th>Visible BM</th>" +
+    "<th>NON Workable BM</th>" +
+    "<th>Workable BM</th>" +
+    "<th>Edit</th>" +
+    "</tr>";
+
+  data.forEach(
+    function(row){
+
+      html +=
+        "<tr>" +
+
+        "<td>" +
+        new Date(row.time).toLocaleDateString() +
+        "</td>" +
+
+        "<td>" +
+        String(row.site || '') +
+        "</td>" +
+
+        "<td>" +
+        String(row.physical ?? 0) +
+        "</td>" +
+
+        "<td>" +
+        String(row.visible ?? 0) +
+        "</td>" +
+
+        "<td>" +
+        String(row.nonWorkable ?? 0) +
+        "</td>" +
+
+        "<td>" +
+        String(row.workable ?? 0) +
+        "</td>" +
+
+        "<td>" +
+        "<button type='button' " +
+        "onclick=\"editAuditSite('" +
+        String(row.site || '').replace(/'/g, "\\'") +
+        "')\">" +
+        "EDIT" +
+        "</button>" +
+        "</td>" +
+
+        "</tr>";
+    }
+  );
+
+  html += "</table>";
+
+  body.innerHTML = html;
+}
+function editAuditSite(site) {
+
+  google.script.run
+    .withSuccessHandler(function(data) {
+      showEditAuditForm(data);
+    })
+    .withFailureHandler(function(error) {
+      alert("Load Error: " + error.message);
+    })
+    .getAuditBySite(site, ADMIN_PIN);
+}
+
+
+function showEditAuditForm(data) {
+
+  const old = document.getElementById("bmEditModal");
+
+  if (old) {
+    old.remove();
+  }
+
+  const modal = document.createElement("div");
+
+  modal.id = "bmEditModal";
+
+  modal.style.cssText = `
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.55);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:99999;
+    padding:15px;
+  `;
+
+  modal.innerHTML = `
+    <div style="
+      background:#fff;
+      width:100%;
+      max-width:650px;
+      max-height:90vh;
+      overflow:auto;
+      border-radius:12px;
+      padding:20px;
+      box-sizing:border-box;
+    ">
+
+      <h2 style="margin-top:0;">
+        EDIT BM AUDIT
+      </h2>
+
+      <div style="
+        background:#f1f5f9;
+        padding:10px;
+        border-radius:8px;
+        margin-bottom:15px;
+      ">
+        <b>Site ID:</b> ${data.site}<br>
+        <b>Current Technician:</b> ${data.technician}
+      </div>
+
+      <label>Technician</label>
+      <input id="editTechnician"
+        type="text"
+        value="${data.technician || ''}"
+        style="width:100%;padding:9px;margin:5px 0 12px;box-sizing:border-box;">
+
+      <label>Physical BM</label>
+      <input id="editPhysical" type="number" min="0" max="10"
+        value="${data.physical}"
+        style="width:100%;padding:9px;margin:5px 0 12px;box-sizing:border-box;">
+
+      <label>Visible BM</label>
+      <input id="editVisible" type="number" min="0" max="10"
+        value="${data.visible}"
+        style="width:100%;padding:9px;margin:5px 0 12px;box-sizing:border-box;">
+
+      <label>Faulty BM</label>
+      <input id="editFaulty" type="number" min="0" max="10"
+        value="${data.faulty}"
+        style="width:100%;padding:9px;margin:5px 0 12px;box-sizing:border-box;">
+
+      <label>BM Sent to WH</label>
+      <input id="editWH" type="number" min="0" max="10"
+        value="${data.wh}"
+        style="width:100%;padding:9px;margin:5px 0 12px;box-sizing:border-box;">
+
+      <label>BM Theft</label>
+      <input id="editTheft" type="number" min="0" max="10"
+        value="${data.theft}"
+        style="width:100%;padding:9px;margin:5px 0 12px;box-sizing:border-box;">
+
+      <label>BM in Site Down</label>
+      <input id="editSiteDown" type="number" min="0" max="10"
+        value="${data.siteDown}"
+        style="width:100%;padding:9px;margin:5px 0 12px;box-sizing:border-box;">
+
+      <label>BM in Degrow</label>
+      <input id="editDegrow" type="number" min="0" max="10"
+        value="${data.degrow}"
+        style="width:100%;padding:9px;margin:5px 0 12px;box-sizing:border-box;">
+
+      <label>SMPS Issue</label>
+      <input id="editSMPSIssue" type="number" min="0" max="10"
+        value="${data.smpsIssue}"
+        style="width:100%;padding:9px;margin:5px 0 12px;box-sizing:border-box;">
+
+      <label>SMPS Upgradation</label>
+      <input id="editSMPSUpgrade" type="number" min="0" max="10"
+        value="${data.smpsUpgrade}"
+        style="width:100%;padding:9px;margin:5px 0 12px;box-sizing:border-box;">
+
+      <label>BM OEM</label>
+      <input id="editBMOEM" type="number" min="0" max="10"
+        value="${data.bmOEM}"
+        style="width:100%;padding:9px;margin:5px 0 12px;box-sizing:border-box;">
+
+      <label>SMPS OEM</label>
+      <input id="editSMPSOEM" type="number" min="0" max="10"
+        value="${data.smpsOEM}"
+        style="width:100%;padding:9px;margin:5px 0 12px;box-sizing:border-box;">
+
+      <label>ISP Issue</label>
+      <input id="editISPIssue" type="number" min="0" max="10"
+        value="${data.ispIssue}"
+        style="width:100%;padding:9px;margin:5px 0 15px;box-sizing:border-box;">
+
+      <div style="
+        background:#f8fafc;
+        padding:12px;
+        border-radius:8px;
+        margin-bottom:15px;
+      ">
+        <b>Current Workable BM:</b> ${data.workable}<br>
+        <b>Current Missing BM:</b> ${data.missing}
+      </div>
+
+      <div style="
+        display:flex;
+        gap:10px;
+        justify-content:flex-end;
+      ">
+
+        <button
+          onclick="document.getElementById('bmEditModal').remove()"
+          style="
+            padding:10px 18px;
+            border:1px solid #ccc;
+            border-radius:7px;
+            background:#fff;
+            cursor:pointer;
+          ">
+          CANCEL
+        </button>
+
+        <button
+          onclick="saveEditedAudit('${String(data.site).replace(/'/g, "\\'")}')"
+          style="
+            padding:10px 18px;
+            border:0;
+            border-radius:7px;
+            background:#2563eb;
+            color:#fff;
+            cursor:pointer;
+          ">
+          UPDATE
+        </button>
+
+      </div>
+
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+}
+
+
+function saveEditedAudit(site) {
+
+  const data = {
+    site: site,
+
+    technician:
+      document.getElementById("editTechnician").value.trim(),
+
+    physical:
+      Number(document.getElementById("editPhysical").value || 0),
+
+    visible:
+      Number(document.getElementById("editVisible").value || 0),
+
+    faulty:
+      Number(document.getElementById("editFaulty").value || 0),
+
+    wh:
+      Number(document.getElementById("editWH").value || 0),
+
+    theft:
+      Number(document.getElementById("editTheft").value || 0),
+
+    siteDown:
+      Number(document.getElementById("editSiteDown").value || 0),
+
+    degrow:
+      Number(document.getElementById("editDegrow").value || 0),
+
+    smpsIssue:
+      Number(document.getElementById("editSMPSIssue").value || 0),
+
+    smpsUpgrade:
+      Number(document.getElementById("editSMPSUpgrade").value || 0),
+
+    bmOEM:
+      Number(document.getElementById("editBMOEM").value || 0),
+
+    smpsOEM:
+      Number(document.getElementById("editSMPSOEM").value || 0),
+
+    ispIssue:
+      Number(document.getElementById("editISPIssue").value || 0)
+  };
+
+
+  google.script.run
+
+    .withSuccessHandler(function(response) {
+
+      alert(response.message);
+
+      if (response.recent) {
+        renderRecentAudits(response.recent);
+      }
+
+      const modal = document.getElementById("bmEditModal");
+
+      if (modal) {
+        modal.remove();
+      }
+
+    })
+
+    .withFailureHandler(function(error) {
+
+      alert(
+        "Update Error:\n" +
+        (error && error.message
+          ? error.message
+          : error)
+      );
+
+    })
+
+    .updateAuditRecord(data, ADMIN_PIN);
+}
+
+/* =================================
+   ADMIN LOGIN
+================================= */
+
+function adminLogin(){
+
+  const pin =
+    document
+      .getElementById(
+        "adminPin"
+      )
+      .value;
+
+
+  if(!pin){
+
+    alert(
+      "Please enter Admin PIN."
+    );
+
+    return;
+
+  }
+
+
+  ADMIN_PIN =
+    pin;
+
+
+  google.script.run
+
+    .withSuccessHandler(
+      function(data){
+
+        renderAdminPanel(
+          data
+        );
+
+      }
+    )
+
+    .withFailureHandler(
+      function(error){
+
+        alert(
+          error.message
+        );
+
+      }
+    )
+
+    .getAdminData(
+      ADMIN_PIN
+    );
+
+}
+
+
+
+/* =================================
+   ADMIN PANEL
+================================= */
+
+function renderAdminPanel(data){
+  ADMIN_DATA = data || {sites:[],technicians:[],audits:[],links:[]};
+  const body = document.getElementById("adminBody");
+  body.innerHTML = `
+    <div class="admin-note">Connected to your existing BM Master and BM Audit Master sheets. Dashboard values are calculated from loaded records.</div>
+    <div class="admin-tabs">
+      <button class="admin-tab active" data-view="overview" onclick="openAdminView('overview',this)">▦ Dashboard</button>
+      <button class="admin-tab" data-view="audits" onclick="openAdminView('audits',this)">▤ Audit History</button>
+      <button class="admin-tab" data-view="sites" onclick="openAdminView('sites',this)">⌖ Site Master</button>
+      <button class="admin-tab" data-view="technicians" onclick="openAdminView('technicians',this)">♙ Technician Master</button>
+      <button class="admin-tab" data-view="reports" onclick="openAdminView('reports',this)">⇩ Reports / Excel</button>
+    </div>
+    <div id="adminViewHost"></div>`;
+  renderAdminView('overview');
+}
+
+function openAdminView(view, button){
+  ADMIN_ACTIVE_VIEW = view;
+  document.querySelectorAll('.admin-tab').forEach(b=>b.classList.toggle('active', b.dataset.view===view));
+  renderAdminView(view);
+}
+function esc(value){return String(value===undefined||value===null?'':value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function adminStats(){
+  const sites=ADMIN_DATA?.sites||[], audits=ADMIN_DATA?.audits||[], techs=ADMIN_DATA?.technicians||[];
+  const audited=new Set(audits.map(a=>String(a.site))).size;
+  const issues=audits.filter(a=>Number(a.faulty)+Number(a.wh)+Number(a.theft)+Number(a.siteDown)+Number(a.degrow)+Number(a.missing)>0).length;
+  return {sites:sites.length,techs:techs.length,audited:audited,pending:Math.max(0,sites.length-audited),completion:sites.length?Math.round(audited/sites.length*100):0,issues:issues,audits:audits.length};
+}
+function kpi(label,value,color){return `<div class="admin-kpi" style="border-left-color:${color||'#1769AA'}"><div class="k-label">${esc(label)}</div><div class="k-value">${esc(value)}</div></div>`;}
+function adminTable(headers, rows){
+  if(!rows.length) return '<div class="admin-empty">No records found for this view.</div>';
+  return `<div class="admin-table-wrap"><table class="admin-table"><thead><tr>${headers.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c===null||c===undefined?'':c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+}
+function renderAdminView(view){
+  const host=document.getElementById('adminViewHost'); if(!host||!ADMIN_DATA)return;
+  const sites=ADMIN_DATA.sites||[], audits=ADMIN_DATA.audits||[], techs=ADMIN_DATA.technicians||[], stats=adminStats();
+  if(view==='overview'){
+    const category=[['Faulty BM',audits.reduce((n,a)=>n+Number(a.faulty||0),0)],['Sent to WH',audits.reduce((n,a)=>n+Number(a.wh||0),0)],['Theft',audits.reduce((n,a)=>n+Number(a.theft||0),0)],['Site Down',audits.reduce((n,a)=>n+Number(a.siteDown||0),0)],['Degrow',audits.reduce((n,a)=>n+Number(a.degrow||0),0)],['Missing BM',audits.reduce((n,a)=>n+Number(a.missing||0),0)]];
+    const max=Math.max(1,...category.map(x=>x[1]));
+    const techRows=techs.map(t=>({name:t,total:sites.filter(s=>s.tech===t).length,done:new Set(audits.filter(a=>a.technician===t).map(a=>a.site)).size})).sort((a,b)=>b.done-a.done);
+    host.innerHTML=`<div class="admin-kpis">${kpi('Total Sites',stats.sites,'#1769AA')}${kpi('Total Technicians',stats.techs,'#7c3aed')}${kpi('Audited Sites',stats.audited,'#16a34a')}${kpi('Pending Audits',stats.pending,'#d97706')}${kpi('Audit Completion',stats.completion+'%','#0891b2')}${kpi('Sites With Issues',stats.issues,'#dc2626')}</div>
+    <div class="admin-chart-grid"><div class="chart-card"><h3 style="margin:0 0 12px">Battery Issue Categories</h3>${category.map(x=>`<div class="chart-row"><span>${esc(x[0])}</span><div class="chart-track"><div class="chart-fill" style="width:${Math.round(x[1]/max*100)}%;background:${x[1]?'#1769AA':'#cbd5e1'}"></div></div><b>${x[1]}</b></div>`).join('')}</div>
+    <div class="chart-card"><h3 style="margin:0 0 12px">Technician Audit Completion</h3>${techRows.length?techRows.slice(0,12).map(t=>{const pct=t.total?Math.round(t.done/t.total*100):0;return `<div class="chart-row"><span title="${esc(t.name)}">${esc(t.name)}</span><div class="chart-track"><div class="chart-fill" style="width:${pct}%;background:${pct===100?'#16a34a':'#1769AA'}"></div></div><b>${t.done}/${t.total}</b></div>`}).join(''):'<div class="admin-empty">No technicians found.</div>'}</div>
+    <div class="chart-card"><h3 style="margin:0 0 12px">Workable vs Non-Workable Sites</h3>${(()=>{const workable=audits.filter(a=>Number(a.workable)>0&&!(Number(a.faulty)+Number(a.wh)+Number(a.theft)+Number(a.siteDown)+Number(a.degrow)>0)).length;const non=audits.filter(a=>Number(a.faulty)+Number(a.wh)+Number(a.theft)+Number(a.siteDown)+Number(a.degrow)>0).length;const mx=Math.max(1,workable,non);return [['Workable',workable,'#16a34a'],['Non-Workable / Issues',non,'#dc2626']].map(x=>`<div class="chart-row"><span>${x[0]}</span><div class="chart-track"><div class="chart-fill" style="width:${Math.round(x[1]/mx*100)}%;background:${x[2]}"></div></div><b>${x[1]}</b></div>`).join('')})()}</div>
+    <div class="chart-card"><h3 style="margin:0 0 12px">JC / Cluster Audit Completion</h3>${(()=>{const groups={};sites.forEach(s=>{const c=s.cluster||s.mp||'Unspecified';if(!groups[c])groups[c]={total:0,done:0};groups[c].total++;if(audits.some(a=>String(a.site)===String(s.site)))groups[c].done++;});const list=Object.entries(groups).sort((a,b)=>b[1].done-a[1].done).slice(0,10);return list.length?list.map(([name,x])=>{const pct=x.total?Math.round(x.done/x.total*100):0;return `<div class="chart-row"><span title="${esc(name)}">${esc(name)}</span><div class="chart-track"><div class="chart-fill" style="width:${pct}%"></div></div><b>${x.done}/${x.total}</b></div>`}).join(''):'<div class="admin-empty">No cluster data.</div>'})()}</div></div>
+    <div class="card" style="margin-top:14px"><h3 style="margin-top:0">Latest Audits</h3>${adminTable(['Audit Date','Technician','Site ID','Physical BM','Workable BM','Missing BM','Status'],audits.slice().reverse().slice(0,10).map(a=>[esc(a.date||a.time),esc(a.technician),`<b>${esc(a.site)}</b>`,a.physical,a.workable,a.missing,`<span class="pill ${Number(a.missing)>0?'warn':'neutral'}">${esc(a.status||'OK')}</span>`]))}</div>`;
+  } else if(view==='audits'){
+    host.innerHTML=`<div class="card"><h3 style="margin-top:0">Audit History / Latest Site Records</h3><div class="admin-toolbar"><input id="auditSearch" placeholder="Search Site ID or technician" oninput="filterAdminTable('auditSearch','adminAuditRows')"><select id="auditTechFilter" onchange="filterAdminTable('auditTechFilter','adminAuditRows')"><option value="">All technicians</option>${techs.map(t=>`<option>${esc(t)}</option>`).join('')}</select><button class="admin-btn secondary" onclick="refreshAdminData()">↻ Refresh</button><button class="admin-btn" onclick="downloadBatteryExcel()">⇩ Export Excel</button></div><div id="adminAuditRows">${auditTableHtml(audits)}</div></div>`;
+  } else if(view==='sites'){
+    const done=new Set(audits.map(a=>String(a.site)));
+    host.innerHTML=`<div class="card"><h3 style="margin-top:0">Site Master</h3><div class="admin-toolbar"><input id="siteSearch" placeholder="Search Site ID / Make / technician" oninput="filterAdminTable('siteSearch','adminSiteRows')"><button class="admin-btn secondary" onclick="refreshAdminData()">↻ Refresh</button><button class="admin-btn" onclick="downloadBatteryExcel()">⇩ Export Excel</button></div><div id="adminSiteRows">${siteTableHtml(sites,done)}</div></div>`;
+  } else if(view==='technicians'){
+    const rows=techs.map(t=>{const assigned=sites.filter(s=>s.tech===t);const audited=new Set(audits.filter(a=>a.technician===t).map(a=>String(a.site))).size;return [esc(t),assigned.length,audited,Math.max(0,assigned.length-audited),`<button class="admin-btn secondary" onclick="openTechAssign('${esc(t).replace(/'/g,'&#39;')}')">Manage Assignment</button>`]});
+    host.innerHTML=`<div class="card"><h3 style="margin-top:0">Technician Master & Site Assignment</h3><div class="admin-toolbar"><select id="adminSite"><option value="">Select Site ID to assign</option>${sites.map(s=>`<option value="${esc(s.site)}">${esc(s.site)} — ${esc(s.tech||'Unassigned')}</option>`).join('')}</select><select id="adminTechnician"><option value="">Select Technician</option>${techs.map(t=>`<option value="${esc(t)}">${esc(t)}</option>`).join('')}</select><button class="admin-btn" onclick="changeTechnician()">Save Assignment</button></div><div class="admin-toolbar"><input id="techSearch" placeholder="Search technician" oninput="filterAdminTable('techSearch','adminTechRows')"><button class="admin-btn secondary" onclick="refreshAdminData()">↻ Refresh</button><button class="admin-btn" onclick="downloadBatteryExcel()">⇩ Export Excel</button></div><div id="adminTechRows">${adminTable(['Technician','Assigned Sites','Audited Sites','Pending Sites','Action'],rows)}</div></div>`;
+  } else if(view==='reports'){
+    host.innerHTML=`<div class="card"><h3 style="margin-top:0">Reports / Excel Download</h3><p class="muted">Creates a real XLSX workbook using the records currently loaded from your Google Sheets. The workbook includes dashboard KPIs, audit records, technician summary, JC/cluster summary where available, battery issues and pending sites.</p><div class="admin-toolbar"><button class="admin-btn" onclick="downloadBatteryExcel()">⇩ Download Complete Excel (.xlsx)</button><button class="admin-btn secondary" onclick="refreshAdminData()">↻ Refresh Data</button></div><div class="admin-note">Site IDs are exported as text. Data worksheets include filters and a frozen header row. Cluster summary uses an existing JC/Cluster column if present; otherwise it is labelled Unspecified.</div></div>`;
+  }
+}
+function auditTableHtml(audits){return adminTable(['Date','Technician','Site ID','NE BM','Make','Physical','Visible','Faulty','WH','Theft','Site Down','Degrow','Workable','Missing','Action'],audits.slice().reverse().map(a=>[esc(a.date||a.time),esc(a.technician),`<b>${esc(a.site)}</b>`,a.ne,esc(a.make),a.physical,a.visible,a.faulty,a.wh,a.theft,a.siteDown,a.degrow,a.workable,a.missing,`<button class="admin-btn secondary" onclick="editAuditSite('${esc(a.site).replace(/'/g,'&#39;')}')">Edit</button>`]));}
+function siteTableHtml(sites,done){return adminTable(['Site ID','BM Make','NE BM','Technician','JC / Cluster','Site Type','Audit Status'],sites.map(s=>[ `<b>${esc(s.site)}</b>`,esc(s.make),s.ne,esc(s.tech),esc(s.cluster||s.mp||'—'),esc(s.siteType||'—'),done.has(String(s.site))?'<span class="pill">Audited</span>':'<span class="pill warn">Pending</span>']));}
+function filterAdminTable(inputId,tableId){
+  const input=document.getElementById(inputId);const target=document.getElementById(tableId);if(!input||!target)return;
+  const q=input.value.toLowerCase();target.querySelectorAll('tbody tr').forEach(tr=>{tr.style.display=tr.innerText.toLowerCase().includes(q)?'':'none';});
+  const tech=document.getElementById('auditTechFilter');if(tech&&inputId==='auditTechFilter'){target.querySelectorAll('tbody tr').forEach(tr=>{tr.style.display=(!q||tr.innerText.toLowerCase().includes(q))?'':'none';});}
+}
+function refreshAdminData(){
+  const host=document.getElementById('adminViewHost');if(host)host.innerHTML='<div class="admin-empty">Loading latest data…</div>';
+  google.script.run.withSuccessHandler(data=>{ADMIN_DATA=data;renderAdminView(ADMIN_ACTIVE_VIEW);}).withFailureHandler(error=>{if(host)host.innerHTML=`<div class="error">Unable to refresh: ${esc(error.message||error)}</div>`;}).getAdminData(ADMIN_PIN);
+}
+function openTechAssign(tech){
+  const select=document.getElementById('adminTechnician');if(select){select.value=tech;}
+  const siteSelect=document.getElementById('adminSite');if(siteSelect){siteSelect.scrollIntoView({behavior:'smooth',block:'center'});}
+  alert('Use the Site ID and New Technician controls above to reassign a site.');
+}
+function downloadBatteryExcel(){
+  try{
+    if(typeof XLSX==='undefined')throw new Error('Excel library did not load. Check internet access and refresh this page.');
+    const d=ADMIN_DATA||{},sites=d.sites||[],audits=d.audits||[],techs=d.technicians||[],stats=adminStats();
+    const wb=XLSX.utils.book_new();
+    function addSheet(name,headers,rows){const ws=XLSX.utils.aoa_to_sheet([headers,...rows]);const range=XLSX.utils.decode_range(ws['!ref']||'A1:A1');ws['!autofilter']={ref:XLSX.utils.encode_range({s:{r:0,c:0},e:{r:range.e.r,c:range.e.c}})};ws['!freeze']={xSplit:0,ySplit:1,topLeftCell:'A2',activePane:'bottomLeft',state:'frozen'};ws['!cols']=headers.map((h,i)=>({wch:Math.min(32,Math.max(12,String(h).length,...rows.slice(0,150).map(r=>String(r[i]??'').length))+2)}));for(let c=0;c<headers.length;c++){const cell=ws[XLSX.utils.encode_cell({r:0,c})];if(cell)cell.s={font:{bold:true,color:{rgb:'FFFFFF'}},fill:{fgColor:{rgb:'123B73'}},alignment:{vertical:'center',wrapText:true}};}for(let r=1;r<=range.e.r;r++){const idCell=ws[XLSX.utils.encode_cell({r:r,c:headers.indexOf('Site ID')})];if(idCell){idCell.t='s';idCell.v=String(idCell.v??'');idCell.z='@';}}ws['!rows']=[{hpt:26}];XLSX.utils.book_append_sheet(wb,ws,name);return ws;}
+    const dashWs=addSheet('Dashboard Summary',['Metric','Value'],[['Total Sites',stats.sites],['Total Technicians',stats.techs],['Audited Sites',stats.audited],['Pending Audits',stats.pending],['Audit Completion %',stats.completion/100],['Sites With Issues',stats.issues],['Audit Records',stats.audits]]);
+    if(dashWs['B6'])dashWs['B6'].z='0.0%';
+    addSheet('All Battery Audit Records',['Audit Date','Audit Date & Time','Technician Name','Site ID','NE BM','BM Make','Physical BM','Zabbix Visible BM','Faulty BM','Sent to WH','Theft','Site Down','Degrow','SMPS Issue','SMPS Upgradation','BM OEM','SMPS OEM','ISP Issue','Workable BM Total','Missing BM','Validation Status'],audits.map(a=>[a.date,a.time,a.technician,String(a.site),a.ne,a.make,a.physical,a.visible,a.faulty,a.wh,a.theft,a.siteDown,a.degrow,a.smpsIssue,a.smpsUpgrade,a.bmOEM,a.smpsOEM,a.ispIssue,a.workable,a.missing,a.status]));
+    const techWs=addSheet('Technician-wise Summary',['Technician','Assigned Sites','Audited Sites','Pending Sites','Completion %'],techs.map(t=>{const assigned=sites.filter(s=>s.tech===t).length;const done=new Set(audits.filter(a=>a.technician===t).map(a=>String(a.site))).size;return [t,assigned,done,Math.max(0,assigned-done),assigned?done/assigned:0]}));
+    for(let r=1;r<=techs.length;r++){const c=techWs[XLSX.utils.encode_cell({r:r,c:4})];if(c)c.z='0.0%';}
+    const clusters=[...new Set(sites.map(s=>s.cluster||s.mp||'Unspecified'))];
+    const clusterWs=addSheet('JC-Cluster Summary',['JC / Cluster','Total Sites','Audited Sites','Pending Sites','Completion %'],clusters.map(c=>{const subset=sites.filter(s=>(s.cluster||s.mp||'Unspecified')===c);const done=subset.filter(s=>audits.some(a=>String(a.site)===String(s.site))).length;return [c,subset.length,done,subset.length-done,subset.length?done/subset.length:0]}));
+    for(let r=1;r<=clusters.length;r++){const c=clusterWs[XLSX.utils.encode_cell({r:r,c:4})];if(c)c.z='0.0%';}
+    addSheet('Battery Issues',['Site ID','Technician','Audit Date','BM Make','Faulty BM','Sent to WH','Theft','Site Down','Degrow','Missing BM','Total Issue Count'],audits.filter(a=>Number(a.faulty)+Number(a.wh)+Number(a.theft)+Number(a.siteDown)+Number(a.degrow)+Number(a.missing)>0).map(a=>[String(a.site),a.technician,a.date,a.make,a.faulty,a.wh,a.theft,a.siteDown,a.degrow,a.missing,Number(a.faulty)+Number(a.wh)+Number(a.theft)+Number(a.siteDown)+Number(a.degrow)+Number(a.missing)]));
+    const doneSet=new Set(audits.map(a=>String(a.site)));
+    addSheet('Pending Audit Sites',['Site ID','BM Make','NE BM','Technician','JC / Cluster','Site Type','Audit Status'],sites.filter(s=>!doneSet.has(String(s.site))).map(s=>[String(s.site),s.make,s.ne,s.tech,s.cluster||s.mp||'Unspecified',s.siteType,'Pending']));
+    XLSX.writeFile(wb,'Battery_Audit_Tracker_'+new Date().toISOString().slice(0,10)+'.xlsx');
+  }catch(e){alert('Excel export failed: '+(e&&e.message?e.message:e));}
+}
+
+/* =================================
+   CHANGE TECHNICIAN
+================================= */
+
+function changeTechnician(){
+
+  const site =
+    document
+      .getElementById(
+        "adminSite"
+      )
+      .value;
+
+
+  const technician =
+    document
+      .getElementById(
+        "adminTechnician"
+      )
+      .value;
+
+
+  if(!site || !technician){
+
+    alert(
+      "Site and Technician required."
+    );
+
+    return;
+
+  }
+
+
+  google.script.run
+
+    .withSuccessHandler(
+      function(response){
+
+        alert(
+          response.message
+        );
+
+
+        adminLogin();
+
+      }
+    )
+
+    .withFailureHandler(
+      function(error){
+
+        alert(
+          error.message
+        );
+
+      }
+    )
+
+    .updateSiteTechnician(
+
+      ADMIN_PIN,
+
+      site,
+
+      technician
+
+    );
+
+}
+
+
+
+/* =================================
+   START
+================================= */
+
+initializeApp();
+
+calculateTotals();
+
+
+</script>
+
+</body>
+
+</html>
