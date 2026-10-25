@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
-<rect width="512" height="512" rx="90" fill="#123f7a"/>
-<rect x="105" y="154" width="302" height="215" rx="28" fill="#fff" stroke="#ffd400" stroke-width="14"/>
-<rect x="407" y="220" width="28" height="82" rx="8" fill="#ffd400"/>
-<rect x="139" y="188" width="52" height="147" rx="9" fill="#123f7a"/>
-<rect x="210" y="188" width="52" height="147" rx="9" fill="#123f7a"/>
-<rect x="281" y="188" width="52" height="147" rx="9" fill="#123f7a"/>
-<text x="256" y="435" text-anchor="middle" font-family="Arial,sans-serif" font-size="37" font-weight="700" fill="#ffd400">ADMIN</text>
-</svg>
