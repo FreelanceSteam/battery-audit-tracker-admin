@@ -158,3 +158,83 @@ footer { text-align: center; padding: 18px; color: #637b9c; }
   <h1>BATTERY AUDIT TRACKER</h1>
   <p>Admin Control Center — Dashboard Preview</p>
 </header>
+
+<div class="notice">
+  Preview mode: sample values only. Live Apps Script data is not connected in this preview.
+</div>
+
+<nav id="navigation">
+  <button class="active" data-page="dashboard">▦ Dashboard</button>
+  <button data-page="history">▤ Audit History</button>
+  <button data-page="sites">♦ Site Master</button>
+  <button data-page="technicians">♟ Technician Master</button>
+  <button data-page="links">🔗 Technician Links</button>
+  <button data-page="reports">⇩ Reports / Excel</button>
+</nav>
+
+<main>
+<section class="section" id="content"></section>
+</main>
+<footer>Battery Audit Tracker · Admin Preview</footer>
+
+<script>
+const pages = {
+ dashboard: `
+  <h2>▦ Dashboard Overview</h2>
+  <p class="muted">Sample preview — figures below are placeholders, not live records.</p>
+  <div class="kpis">
+   <div class="kpi k1"><small>Total Sites</small><strong>—</strong></div>
+   <div class="kpi k2"><small>Audited</small><strong>—</strong></div>
+   <div class="kpi k3"><small>Pending</small><strong>—</strong></div>
+   <div class="kpi k4"><small>NE BM</small><strong>—</strong></div>
+   <div class="kpi k5"><small>Physical BM</small><strong>—</strong></div>
+   <div class="kpi k6"><small>Faulty BM at Site</small><strong>—</strong></div>
+  </div>
+  <h3>Site Type-wise Summary</h3>
+  <p class="muted">Live summary and charts will be added after secure data integration.</p>
+  <div class="table-wrap"><table><thead><tr><th>Site Type</th><th>Total Sites</th><th>Audited</th><th>Pending</th></tr></thead><tbody><tr><td>Sample preview</td><td>—</td><td>—</td><td>—</td></tr></tbody></table></div>
+ `,
+ history: `
+  <h2>▤ Audit History</h2>
+  <p class="muted">Audit records and edit actions will be connected to the existing Apps Script after access checks.</p>
+  <div class="toolbar"><input placeholder="Search Site ID or technician" disabled><button class="action" disabled>Refresh</button><button class="action" disabled>Export Excel</button></div>
+  <div class="table-wrap"><table><thead><tr><th>Date & Time</th><th>Technician</th><th>Site ID</th><th>NE BM</th><th>BM Make</th><th>Audit Status</th></tr></thead><tbody><tr><td colspan="6">Preview only — no live records loaded</td></tr></tbody></table></div>
+ `,
+ sites: `
+  <h2>♦ Site Master</h2>
+  <p class="muted">Site search, technician assignment, audit status and Excel export will be integrated here.</p>
+  <div class="toolbar"><input placeholder="Search Site ID / Make / technician" disabled><button class="action" disabled>Refresh</button><button class="action" disabled>Export Excel</button></div>
+  <div class="table-wrap"><table><thead><tr><th>Site ID</th><th>NE BM</th><th>BM Make</th><th>Technician</th><th>Site Type</th><th>Audit Status</th></tr></thead><tbody><tr><td colspan="6">Preview only — no live records loaded</td></tr></tbody></table></div>
+ `,
+ technicians: `
+  <h2>♟ Technician Master & Site Assignment</h2>
+  <p class="muted">Assignment controls will be enabled only after write-access protection is in place.</p>
+  <div class="toolbar"><select disabled><option>Select Site ID to assign</option></select><select disabled><option>Select Technician</option></select><button class="action" disabled>Save Assignment</button></div>
+  <div class="table-wrap"><table><thead><tr><th>Technician</th><th>Assigned Sites</th><th>Audited Sites</th><th>Pending Sites</th><th>Action</th></tr></thead><tbody><tr><td colspan="5">Preview only — no live records loaded</td></tr></tbody></table></div>
+ `,
+ links: `
+  <h2>🔗 Technician Links & Management</h2>
+  <p class="muted">Private technician links must remain protected. No tokens or private links are displayed in this preview.</p>
+  <div class="toolbar"><input placeholder="Enter new technician full name" disabled><button class="action" disabled>Add New Technician</button></div>
+  <div class="table-wrap"><table><thead><tr><th>Technician</th><th>Assigned Sites</th><th>Status</th><th>Technician App Link</th><th>Actions</th></tr></thead><tbody><tr><td colspan="5">Preview only — no private links loaded</td></tr></tbody></table></div>
+ `,
+ reports: `
+  <h2>⇩ Reports / Excel Download</h2>
+  <p class="muted">The existing workbook format will be preserved when the live report function is connected.</p>
+  <ul><li>Dashboard Summary</li><li>All Battery Audit Records</li><li>Technician-wise Summary</li><li>Site Type Summary</li><li>BM Make Summary</li><li>Battery Issues</li><li>Pending Audit Sites</li></ul>
+  <button class="action" disabled>Download Complete Excel (.xlsx)</button>
+ `
+};
+
+const content = document.getElementById("content");
+document.getElementById("navigation").addEventListener("click", event => {
+ const button = event.target.closest("button[data-page]");
+ if (!button) return;
+ document.querySelectorAll("nav button").forEach(item => item.classList.remove("active"));
+ button.classList.add("active");
+ content.innerHTML = pages[button.dataset.page];
+});
+content.innerHTML = pages.dashboard;
+</script>
+</body>
+</html>
