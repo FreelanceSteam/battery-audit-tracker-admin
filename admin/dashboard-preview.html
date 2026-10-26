@@ -178,6 +178,29 @@ footer { text-align: center; padding: 18px; color: #637b9c; }
 <footer>Battery Audit Tracker · Admin Preview</footer>
 
 <script>
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzZjSM5-ZV8zsJiJaHnlZ-pv9L1BcUt0479nMMUNY35L6BeHXgtYsTUQ-HU6Uqxt3Vzvw/exec";
+
+function loadDashboardData() {
+  const status = document.querySelector(".notice");
+  status.textContent = "Checking Battery Audit backend...";
+
+  fetch(APPS_SCRIPT_URL + "?action=health")
+    .then(response => {
+      if (!response.ok) throw new Error("Backend unavailable");
+      return response.json();
+    })
+    .then(result => {
+      if (!result.ok) throw new Error("Health check failed");
+
+      status.textContent =
+        "Connected to Battery Audit backend. All required sheets are available.";
+    })
+    .catch(error => {
+      status.textContent =
+        "Connection check failed. Please retry.";
+      console.error(error);
+    });
+}
 const pages = {
  dashboard: `
   <h2>▦ Dashboard Overview</h2>
@@ -235,6 +258,7 @@ document.getElementById("navigation").addEventListener("click", event => {
  content.innerHTML = pages[button.dataset.page];
 });
 content.innerHTML = pages.dashboard;
+  loadDashboardData();
 </script>
 </body>
 </html>
