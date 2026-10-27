@@ -1,27 +1,355 @@
 
-{
-  "id": "./",
-  "name": "Battery Audit",
-  "short_name": "Battery Audit",
-  "description": "Battery Audit mobile app",
-  "start_url": "./",
-  "scope": "./",
-  "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#0754c8",
-  "theme_color": "#0754c8",
-  "icons": [
-    {
-      "src": "./bm-audit-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "./bm-audit-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+  <meta name="theme-color" content="#0754c8">
+  <meta name="description" content="Battery Audit mobile app">
+
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./bm-audit-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="./bm-audit-192.png">
+
+  <title>Battery Audit</title>
+
+  <style>
+    :root {
+      color-scheme: light;
+      --navy: #082b68;
+      --blue: #0754c8;
+      --yellow: #ffc914;
     }
-  ]
-}
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: grid;
+      place-items: center;
+      padding: 22px;
+      background: radial-gradient(
+        ellipse at 50% 35%,
+        #1977f5 0,
+        #0754c8 48%,
+        #063582 100%
+      );
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    body:before,
+    body:after {
+      content: "";
+      position: fixed;
+      pointer-events: none;
+      left: -10%;
+      width: 120%;
+      height: 28%;
+      border-radius: 50%;
+      background: rgba(55,150,255,.13);
+      transform: rotate(-8deg);
+    }
+
+    body:before {
+      bottom: 0;
+    }
+
+    body:after {
+      bottom: -9%;
+      background: rgba(0,31,107,.16);
+      transform: rotate(7deg);
+    }
+
+    .launcher {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 620px);
+      padding: clamp(24px,5vw,48px) clamp(20px,5vw,46px) 32px;
+      text-align: center;
+      border: 1px solid rgba(126,190,255,.55);
+      border-radius: 32px;
+      background: linear-gradient(
+        145deg,
+        rgba(39,130,245,.88),
+        rgba(0,63,170,.84)
+      );
+      box-shadow:
+        0 22px 55px rgba(0,24,87,.28),
+        inset 0 1px rgba(255,255,255,.2);
+    }
+
+    .logo {
+      display: block;
+      width: clamp(150px,38vw,250px);
+      aspect-ratio: 1;
+      object-fit: contain;
+      margin: 0 auto 14px;
+      border-radius: 28px;
+    }
+
+    h1 {
+      margin: 8px 0 28px;
+      font-size: clamp(24px,5vw,38px);
+      line-height: 1.15;
+      font-weight: 800;
+      letter-spacing: -.5px;
+    }
+
+    .actions {
+      display: grid;
+      gap: 14px;
+    }
+
+    .action {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-height: 68px;
+      padding: 16px 18px;
+      border: 0;
+      border-radius: 18px;
+      font-size: clamp(16px,3.5vw,21px);
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 5px 0 rgba(0,25,84,.13);
+      transition: transform .15s ease, filter .15s ease;
+    }
+
+    .action:active {
+      transform: translateY(1px);
+    }
+
+    .action:hover {
+      filter: brightness(1.03);
+    }
+
+    .open {
+      background: linear-gradient(#ffda32,#ffc000);
+      color: #08295f;
+    }
+
+    .install {
+      background: #fff;
+      color: #08295f;
+    }
+
+    .install[hidden] {
+      display: none;
+    }
+
+    .icon {
+      width: 24px;
+      height: 24px;
+      flex: 0 0 24px;
+    }
+
+    .hint {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #e4efff;
+      margin: 18px 0 0;
+    }
+
+    .status {
+      min-height: 20px;
+      font-size: 13px;
+      margin-top: 10px;
+      color: #fff2b8;
+    }
+
+    @media (max-width: 420px) {
+      body {
+        padding: 12px;
+      }
+
+      .launcher {
+        border-radius: 24px;
+        padding: 26px 18px 24px;
+      }
+
+      .action {
+        min-height: 60px;
+        border-radius: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="launcher" aria-label="Battery Audit launcher">
+
+    <img
+      class="logo"
+      src="./bm-audit-512.png"
+      alt="Battery Audit logo"
+      onerror="this.style.display='none';document.getElementById('fallbackLogo').hidden=false"
+    >
+
+    <div
+      id="fallbackLogo"
+      hidden
+      aria-hidden="true"
+      style="font-size:100px;margin:0 auto 14px"
+    >🔋</div>
+
+    <h1>Battery Audit</h1>
+
+    <div class="actions">
+
+      <a
+        class="action open"
+        id="openAdmin"
+        href="https://script.google.com/macros/s/AKfycbzZjSM5-ZV8zsJiJaHnlZ-pv9L1BcUt0479nMMUNY35L6BeHXgtYsTUQ-HU6Uqxt3Vzvw/exec"
+        target="_blank"
+        rel="noopener"
+      >
+        <svg
+          class="icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M14 3h7v7"/>
+          <path d="M10 14 21 3"/>
+          <path d="M19 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h6"/>
+        </svg>
+
+        OPEN ADMIN APP
+      </a>
+
+      <button
+        class="action install"
+        id="installButton"
+        type="button"
+        hidden
+      >
+        <svg
+          class="icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M12 3v12"/>
+          <path d="m7 10 5 5 5-5"/>
+          <path d="M5 17v3h14v-3"/>
+        </svg>
+
+        INSTALL APP
+      </button>
+
+    </div>
+
+    <p class="hint">
+      Install Battery Audit on your phone for quick access.
+    </p>
+
+    <div
+      class="status"
+      id="status"
+      role="status"
+      aria-live="polite"
+    ></div>
+
+  </main>
+
+<script>
+  // Existing Apps Script URL — unchanged.
+  const ADMIN_APP_URL =
+    "https://script.google.com/macros/s/AKfycbzZjSM5-ZV8zsJiJaHnlZ-pv9L1BcUt0479nMMUNY35L6BeHXgtYsTUQ-HU6Uqxt3Vzvw/exec";
+
+  const openAdmin = document.getElementById("openAdmin");
+  const installButton = document.getElementById("installButton");
+  const statusEl = document.getElementById("status");
+
+  let installPrompt = null;
+
+  openAdmin.href = ADMIN_APP_URL;
+
+  function isInstalledMode() {
+    return window.matchMedia("(display-mode: standalone)").matches ||
+           window.matchMedia("(display-mode: fullscreen)").matches ||
+           window.navigator.standalone === true;
+  }
+
+  function refreshInstallButton() {
+    installButton.hidden = isInstalledMode() || !installPrompt;
+  }
+
+  window.addEventListener("beforeinstallprompt", event => {
+    event.preventDefault();
+    installPrompt = event;
+    refreshInstallButton();
+  });
+
+  installButton.addEventListener("click", async () => {
+    if (!installPrompt) {
+      statusEl.textContent =
+        "Open Chrome menu ⋮ and choose Install app or Add to Home screen.";
+      return;
+    }
+
+    installPrompt.prompt();
+
+    await installPrompt.userChoice;
+
+    installPrompt = null;
+    refreshInstallButton();
+  });
+
+  window.addEventListener("appinstalled", () => {
+    installPrompt = null;
+    installButton.hidden = true;
+    statusEl.textContent = "Battery Audit installed successfully.";
+  });
+
+  // iPhone installation guidance.
+  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+
+  if (isIOS && !isInstalledMode()) {
+    installButton.hidden = false;
+
+    installButton.addEventListener("click", () => {
+      statusEl.textContent =
+        "Safari: tap Share, then choose Add to Home Screen.";
+    }, { once: true });
+  }
+
+  // Register the existing service worker.
+  if ("serviceWorker" in navigator &&
+      location.protocol.startsWith("http")) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker
+        .register("./service-worker.js")
+        .catch(error => {
+          console.warn("Service worker registration failed", error);
+        });
+    });
+  }
+
+  refreshInstallButton();
+</script>
+
+</body>
+</html>
