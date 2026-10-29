@@ -11,7 +11,6 @@
   "orientation": "portrait",
   "background_color": "#0754c8",
   "theme_color": "#0754c8",
-  "icons": [
 "icons": [
   {
     "src": "./icons/battery-admin-192.png",
