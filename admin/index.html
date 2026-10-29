@@ -222,7 +222,19 @@ height: 8%;
   pointer-events: auto;
   background: transparent;
 }
-
+    
+.launcher-banner .banner-install-link {
+  position: absolute;
+  left: 10%;
+  top: 78%;
+  width: 80%;
+  height: 12%;
+  display: block;
+  z-index: 9998;
+  cursor: pointer;
+  background: transparent;
+}
+    
 .launcher-banner .banner-admin-link:focus-visible {
   outline: 4px solid #ffffff;
   outline-offset: 3px;
@@ -248,6 +260,13 @@ height: 8%;
       aria-label="Open Admin App"
       title="Open Admin App"
     ></a>
+    <a
+  class="banner-install-link"
+  id="bannerInstallLink"
+  href="#"
+  aria-label="Install Battery Audit Tracker"
+  title="Install Battery Audit Tracker"
+></a>
   </div>
 
   <button
@@ -292,7 +311,10 @@ const ADMIN_APP_URL = "https://script.google.com/macros/s/AKfycbxgHnF42jCsaDW4C1
     installPrompt = event;
     refreshInstallButton();
   });
-
+document.getElementById("bannerInstallLink").addEventListener("click", event => {
+  event.preventDefault();
+  installButton.click();
+});
   installButton.addEventListener("click", async () => {
     if (!installPrompt) {
       statusEl.textContent =
