@@ -1,8 +1,10 @@
 {
   "id": "./",
-  "name": "BM Audit Admin App",
-  "short_name": "BM Audit",
-  "description": "BM Audit Admin App launcher",
+ 
+"name": "Battery Audit Tracker Admin",
+"short_name": "Battery Admin",
+"description": "Battery Audit Tracker Admin App - Designed by Nagendra Yadav",
+
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
