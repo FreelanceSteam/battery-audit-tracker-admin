@@ -209,15 +209,19 @@
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.28);
 }
 
-.launcher-banner img {
-  display: block;
-  width: 100%;
-  height: auto;
+.launcher-banner {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 auto !important;
 }
 
-
-
-
+.launcher-banner img {
+  display: block;
+  width: 100% !important;
+  max-width: none !important;
+  height: auto !important;
+  object-fit: contain;
+}
 .launcher-banner .banner-admin-link {
   position: absolute;
   left: 22%;
