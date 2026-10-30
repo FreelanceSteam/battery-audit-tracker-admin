@@ -105,31 +105,44 @@
       }
       /* Enlarge the visible Admin button on phones while leaving desktop artwork untouched. */
       .banner-admin-link {
-        /* Banner is 150vw wide and shifted left by 25vw.
-           These coordinates center the overlay on the visible yellow artwork button. */
-        left:22%;
-        top:69.5%;
-        width:56%;
-        height:15%;
-        border:2px solid rgba(255,231,112,.98);
-        border-radius:20px;
+        /* Narrower than the artwork: increase height only, never stretch edge-to-edge. */
+        left:25%;
+        top:68.8%;
+        width:50%;
+        height:16%;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        border:2px solid #fff0a6;
+        border-radius:18px;
         color:#08295f;
-        font-size:clamp(16px,4.5vw,23px);
+        font-size:clamp(15px,4vw,21px);
         font-weight:900;
-        letter-spacing:.2px;
-        line-height:1;
+        letter-spacing:.1px;
+        line-height:1.1;
         text-decoration:none;
-        background:linear-gradient(180deg,#ffe96b 0%,#ffd12b 52%,#ffb900 100%);
-        box-shadow:0 6px 0 rgba(101,57,0,.45),0 0 20px rgba(255,205,34,.72),inset 0 2px 3px rgba(255,255,255,.8);
+        background:linear-gradient(180deg,#fff18a 0%,#ffd943 34%,#ffbf12 72%,#e99a00 100%);
+        box-shadow:
+          0 7px 0 #9a5b00,
+          0 10px 17px rgba(0,12,55,.48),
+          0 0 15px rgba(255,210,45,.55),
+          inset 0 3px 4px rgba(255,255,255,.9),
+          inset 0 -4px 5px rgba(154,91,0,.22);
         transition:transform .12s ease,filter .12s ease,box-shadow .12s ease;
+        -webkit-tap-highlight-color:transparent;
       }
       .banner-admin-link::before {
         content:"↗  OPEN ADMIN APP  ›";
+        white-space:nowrap;
       }
       .banner-admin-link:active {
-        transform:scale(.94);
-        filter:brightness(.92);
-        box-shadow:0 2px 0 rgba(101,57,0,.45),0 0 28px rgba(255,224,76,1),inset 0 3px 7px rgba(125,74,0,.25);
+        transform:translateY(5px) scale(.97);
+        filter:brightness(.96);
+        box-shadow:
+          0 2px 0 #9a5b00,
+          0 4px 9px rgba(0,12,55,.42),
+          0 0 22px rgba(255,224,76,.9),
+          inset 0 3px 6px rgba(154,91,0,.28);
       }
       .banner-admin-link:focus-visible {
         outline:3px solid #fff;
