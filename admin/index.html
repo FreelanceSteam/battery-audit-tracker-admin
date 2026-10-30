@@ -105,15 +105,15 @@
       }
       /* Enlarge the visible Admin button on phones while leaving desktop artwork untouched. */
       .banner-admin-link {
-        /* Align tightly with the artwork's yellow button; keep install text clear below. */
+        /* Precisely cover the printed yellow button, without covering install text. */
         left:25%;
-        top:70.5%;
+        top:67.7%;
         width:50%;
-        height:8.2%;
+        height:9.4%;
         display:flex;
         align-items:center;
         justify-content:center;
-        border:2px solid #fff0a6;
+        border:2px solid #fff1ad;
         border-radius:18px;
         color:#08295f;
         font-size:clamp(15px,4vw,21px);
@@ -121,13 +121,13 @@
         letter-spacing:.1px;
         line-height:1.1;
         text-decoration:none;
-        background:linear-gradient(180deg,#fff18a 0%,#ffd943 34%,#ffbf12 72%,#e99a00 100%);
+        background:linear-gradient(180deg,#fff6a6 0%,#ffe45b 24%,#ffca19 66%,#ed9f00 100%);
         box-shadow:
-          0 5px 0 #9a5b00,
-          0 8px 13px rgba(0,12,55,.38),
-          0 0 13px rgba(255,210,45,.48),
-          inset 0 3px 4px rgba(255,255,255,.9),
-          inset 0 -3px 4px rgba(154,91,0,.2);
+          0 5px 0 #995800,
+          0 8px 13px rgba(0,12,55,.34),
+          0 0 13px rgba(255,210,45,.5),
+          inset 0 3px 4px rgba(255,255,255,.92),
+          inset 0 -3px 5px rgba(154,91,0,.2);
         transition:transform .12s ease,filter .12s ease,box-shadow .12s ease;
         -webkit-tap-highlight-color:transparent;
       }
@@ -139,8 +139,8 @@
         transform:translateY(3px) scale(.97);
         filter:brightness(.96);
         box-shadow:
-          0 2px 0 #9a5b00,
-          0 4px 8px rgba(0,12,55,.38),
+          0 2px 0 #995800,
+          0 4px 8px rgba(0,12,55,.36),
           0 0 18px rgba(255,224,76,.85),
           inset 0 3px 6px rgba(154,91,0,.25);
       }
