@@ -105,11 +105,11 @@
       }
       /* Enlarge the visible Admin button on phones while leaving desktop artwork untouched. */
       .banner-admin-link {
-        /* Keep the button inside the artwork's original button area. */
+        /* Align tightly with the artwork's yellow button; keep install text clear below. */
         left:25%;
-        top:70%;
+        top:70.5%;
         width:50%;
-        height:10%;
+        height:8.2%;
         display:flex;
         align-items:center;
         justify-content:center;
@@ -123,11 +123,11 @@
         text-decoration:none;
         background:linear-gradient(180deg,#fff18a 0%,#ffd943 34%,#ffbf12 72%,#e99a00 100%);
         box-shadow:
-          0 6px 0 #9a5b00,
-          0 9px 15px rgba(0,12,55,.42),
-          0 0 15px rgba(255,210,45,.55),
+          0 5px 0 #9a5b00,
+          0 8px 13px rgba(0,12,55,.38),
+          0 0 13px rgba(255,210,45,.48),
           inset 0 3px 4px rgba(255,255,255,.9),
-          inset 0 -4px 5px rgba(154,91,0,.22);
+          inset 0 -3px 4px rgba(154,91,0,.2);
         transition:transform .12s ease,filter .12s ease,box-shadow .12s ease;
         -webkit-tap-highlight-color:transparent;
       }
@@ -136,13 +136,13 @@
         white-space:nowrap;
       }
       .banner-admin-link:active {
-        transform:translateY(4px) scale(.97);
+        transform:translateY(3px) scale(.97);
         filter:brightness(.96);
         box-shadow:
           0 2px 0 #9a5b00,
-          0 4px 8px rgba(0,12,55,.4),
-          0 0 22px rgba(255,224,76,.9),
-          inset 0 3px 6px rgba(154,91,0,.28);
+          0 4px 8px rgba(0,12,55,.38),
+          0 0 18px rgba(255,224,76,.85),
+          inset 0 3px 6px rgba(154,91,0,.25);
       }
       .banner-admin-link:focus-visible {
         outline:3px solid #fff;
