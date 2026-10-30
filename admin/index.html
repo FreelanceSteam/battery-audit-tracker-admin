@@ -52,8 +52,11 @@
     .banner-admin-link {
       position:absolute;
       left:7%; top:66%; width:86%; height:19%;
-      z-index:5; display:block; border-radius:18px; cursor:pointer;
+      z-index:5; display:flex; align-items:center; justify-content:center;
+      border-radius:18px; cursor:pointer;
       background:transparent;
+      color:transparent; text-decoration:none;
+      -webkit-tap-highlight-color:transparent;
     }
     .banner-install-link {
       position:absolute;
@@ -100,7 +103,37 @@
         max-width:none;
         height:auto;
       }
-      /* Keep the tap targets aligned with the artwork as it scales. */
+      /* Enlarge the visible Admin button on phones while leaving desktop artwork untouched. */
+      .banner-admin-link {
+        left:8%;
+        top:69.2%;
+        width:84%;
+        height:7.2%;
+        border:2px solid rgba(255,231,112,.95);
+        border-radius:18px;
+        color:#08295f;
+        font-size:clamp(15px,4.4vw,22px);
+        font-weight:900;
+        letter-spacing:.2px;
+        line-height:1;
+        text-shadow:0 1px 0 rgba(255,255,255,.45);
+        background:linear-gradient(180deg,#ffe86a 0%,#ffd12b 48%,#ffb900 100%);
+        box-shadow:0 5px 0 rgba(101,57,0,.42),0 0 16px rgba(255,205,34,.55),inset 0 2px 2px rgba(255,255,255,.75);
+        transition:transform .12s ease,filter .12s ease,box-shadow .12s ease;
+      }
+      .banner-admin-link::before {
+        content:"↗  OPEN ADMIN APP  ›";
+      }
+      .banner-admin-link:active {
+        transform:scale(.96);
+        filter:brightness(.94);
+        box-shadow:0 2px 0 rgba(101,57,0,.42),0 0 24px rgba(255,224,76,.9),inset 0 2px 5px rgba(125,74,0,.2);
+      }
+      .banner-admin-link:focus-visible {
+        outline:3px solid #fff;
+        outline-offset:3px;
+      }
+      /* Keep the install tap target aligned with the artwork. */
     }
   </style>
 </head>
