@@ -10,84 +10,116 @@
   <link rel="apple-touch-icon" href="./icons/battery-admin-192.png">
   <title>Battery Audit Tracker Admin</title>
   <style>
-    :root { color-scheme: light; }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; min-height: 100%; }
+    :root { color-scheme: light; --navy:#082b68; --blue:#0754c8; }
+    * { box-sizing:border-box; }
+    html,body { margin:0; min-height:100%; font-family:Arial,Helvetica,sans-serif; }
     body {
-      min-height: 100vh;
-      min-height: 100dvh;
-      display: grid;
-      place-items: center;
-      padding: clamp(8px, 2vw, 22px);
-      background: radial-gradient(ellipse at 50% 35%, #1977f5 0%, #0754c8 48%, #063582 100%);
-      color: white;
-      font-family: Arial, Helvetica, sans-serif;
-      overflow-x: hidden;
+      min-height:100vh; min-height:100dvh;
+      display:grid; place-items:center;
+      padding:12px;
+      background:radial-gradient(ellipse at 50% 35%,#1977f5 0,#0754c8 48%,#063582 100%);
+      color:#fff; overflow-x:hidden;
     }
+    body::before,body::after {
+      content:""; position:fixed; pointer-events:none;
+      left:-10%; width:120%; height:28%; border-radius:50%;
+      background:rgba(55,150,255,.13); transform:rotate(-8deg);
+    }
+    body::before { bottom:0; }
+    body::after { bottom:-9%; background:rgba(0,31,107,.16); transform:rotate(7deg); }
     .launcher {
-      width: min(100%, 620px);
-      position: relative;
-      z-index: 1;
-      margin: 0 auto;
-      text-align: center;
+      position:relative; z-index:1;
+      width:min(100%,620px);
+      margin:auto;
+      padding:0;
+      text-align:center;
+      border-radius:28px;
+      background:linear-gradient(145deg,#031b59,#0752bd 48%,#031747);
+      box-shadow:0 22px 55px rgba(0,15,65,.38),0 0 28px rgba(0,145,255,.16);
     }
     .launcher-banner {
-      position: relative;
-      width: 100%;
-      margin: 0 auto;
-      line-height: 0;
-      overflow: hidden;
-      border-radius: clamp(14px, 3vw, 24px);
-      box-shadow: 0 12px 35px rgba(0, 0, 0, .28);
+      position:relative; display:block;
+      width:100%; margin:0;
+      overflow:hidden; border-radius:inherit;
+      line-height:0;
     }
     .launcher-banner img {
-      display: block;
-      width: 100%;
-      height: auto;
-      object-fit: contain;
+      display:block; width:100%; height:auto;
+      max-width:100%; object-fit:contain;
     }
-    .banner-admin-link, .banner-install-link {
-      position: absolute;
-      display: block;
-      z-index: 2;
-      background: transparent;
-      cursor: pointer;
-      border-radius: 12px;
+    /* Hotspots match the artwork's yellow button and install instruction.
+       Percentages scale with the original image without stretching it. */
+    .banner-admin-link {
+      position:absolute; left:9.5%; top:62.2%; width:81%; height:5.5%;
+      z-index:2; display:block; border-radius:18px; cursor:pointer;
     }
-    /* Percentages correspond to the approved full-height banner artwork. */
-    .banner-admin-link { left: 9.5%; top: 62.3%; width: 81%; height: 5.8%; }
-    .banner-install-link { left: 12%; top: 68.7%; width: 76%; height: 5%; }
-    .banner-admin-link:focus-visible, .banner-install-link:focus-visible {
-      outline: 3px solid white;
-      outline-offset: -3px;
+    .banner-install-link {
+      position:absolute; left:12%; top:68.7%; width:76%; height:4.9%;
+      z-index:2; display:block; cursor:pointer;
     }
-    .status {
-      font-size: 13px;
-      line-height: 1.5;
-      color: #fff2b8;
-      text-align: center;
+    .banner-admin-link:focus-visible,
+    .banner-install-link:focus-visible {
+      outline:3px solid white; outline-offset:2px;
     }
-    .status:not(:empty) { margin: 12px 8px 0; }
-    @media (max-width: 420px) {
-      body { padding: 6px; }
-      .launcher { width: 100%; }
-      .launcher-banner { border-radius: 16px; }
+    .install {
+      display:block; width:calc(100% - 28px); margin:12px 14px;
+      min-height:48px; border:0; border-radius:14px;
+      background:#ffca14; color:#08295f; font-size:16px;
+      font-weight:800; cursor:pointer;
+    }
+    .install[hidden] { display:none; }
+    .status { font-size:13px; line-height:1.5; color:#fff2b8; }
+    .status:empty { display:none; }
+    .status:not(:empty) { padding:4px 14px 14px; }
+    @media (max-width:600px) {
+      body {
+        padding:0;
+        display:grid;
+        place-items:center;
+        overflow-x:hidden;
+      }
+      .launcher {
+        width:100%;
+        max-width:none;
+        margin:auto;
+        border-radius:0;
+        box-shadow:none;
+      }
+      .launcher-banner {
+        width:150vw;
+        max-width:none;
+        margin-left:-25vw;
+        border-radius:0;
+      }
+      .launcher-banner img {
+        width:100%;
+        max-width:none;
+        height:auto;
+      }
+      /* Keep the tap targets aligned with the artwork as it scales. */
     }
   </style>
 </head>
 <body>
   <main class="launcher" aria-label="Battery Audit Tracker Admin launcher">
     <div class="launcher-banner">
-      <img src="./icons/battery-admin-banner.png?v=2" alt="Battery Audit Tracker Admin — Designed by Nagendra Yadav">
-      <a class="banner-admin-link" id="openAdmin" href="https://script.google.com/macros/s/AKfycbzZjSM5-ZV8zsJiJaHnlZ-pv9L1BcUt0479nMMUNY35L6BeHXgtYsTUQ-HU6Uqxt3Vzvw/exec?admin=1" aria-label="Open Admin App" title="Open Admin App"></a>
-      <a class="banner-install-link" id="bannerInstallLink" href="#" aria-label="Install Battery Audit Tracker" title="Install Battery Audit Tracker"></a>
+      <img src="./icons/battery-admin-banner.png?v=2"
+           alt="Battery Audit Tracker Admin — Designed by Nagendra Yadav">
+      <a class="banner-admin-link" id="openAdmin"
+         href="https://script.google.com/macros/s/AKfycbzZjSM5-ZV8zsJiJaHnlZ-pv9L1BcUt0479nMMUNY35L6BeHXgtYsTUQ-HU6Uqxt3Vzvw/exec?admin=1"
+         target="_self" aria-label="Open Admin App" title="Open Admin App"></a>
+      <a class="banner-install-link" id="bannerInstallLink"
+         href="#" aria-label="Install Battery Audit Tracker"
+         title="Install Battery Audit Tracker"></a>
     </div>
+    <button class="install" id="installButton" type="button" hidden>INSTALL APP</button>
     <div class="status" id="status" role="status" aria-live="polite"></div>
   </main>
   <script>
     const ADMIN_APP_URL = "https://script.google.com/macros/s/AKfycbzZjSM5-ZV8zsJiJaHnlZ-pv9L1BcUt0479nMMUNY35L6BeHXgtYsTUQ-HU6Uqxt3Vzvw/exec?admin=1";
     const openAdmin = document.getElementById("openAdmin");
-    const installLink = document.getElementById("bannerInstallLink");
+    const installButton = document.getElementById("installButton");
+    const bannerInstallLink = document.getElementById("bannerInstallLink");
     const statusEl = document.getElementById("status");
     let installPrompt = null;
     openAdmin.href = ADMIN_APP_URL;
@@ -97,39 +129,58 @@
              window.matchMedia("(display-mode: fullscreen)").matches ||
              window.navigator.standalone === true;
     }
-    window.addEventListener("beforeinstallprompt", event => {
-      event.preventDefault();
-      installPrompt = event;
-    });
-    installLink.addEventListener("click", async event => {
-      event.preventDefault();
+    function refreshInstallButton() {
+      installButton.hidden = isInstalledMode() || !installPrompt;
+    }
+    function showInstallGuidance() {
+      if (/iphone|ipad|ipod/i.test(navigator.userAgent)) {
+        statusEl.textContent = "Safari: tap Share, then choose Add to Home Screen.";
+      } else {
+        statusEl.textContent = "Open your browser menu and choose Install app or Add to Home screen.";
+      }
+    }
+    async function requestInstall() {
       if (isInstalledMode()) {
         statusEl.textContent = "Battery Audit is already running as an installed app.";
         return;
       }
-      if (installPrompt) {
-        const promptEvent = installPrompt;
-        installPrompt = null;
-        await promptEvent.prompt();
-        await promptEvent.userChoice;
+      if (!installPrompt) {
+        showInstallGuidance();
         return;
       }
-      if (/iphone|ipad|ipod/i.test(navigator.userAgent)) {
-        statusEl.textContent = "Safari: tap Share, then choose Add to Home Screen.";
-      } else {
-        statusEl.textContent = "Open your browser menu and choose Install app or Add to Home screen (if available).";
+      const promptEvent = installPrompt;
+      installPrompt = null;
+      refreshInstallButton();
+      try {
+        await promptEvent.prompt();
+        await promptEvent.userChoice;
+      } catch (error) {
+        showInstallGuidance();
       }
+    }
+    window.addEventListener("beforeinstallprompt", event => {
+      event.preventDefault();
+      installPrompt = event;
+      refreshInstallButton();
     });
+    bannerInstallLink.addEventListener("click", event => {
+      event.preventDefault();
+      requestInstall();
+    });
+    installButton.addEventListener("click", requestInstall);
     window.addEventListener("appinstalled", () => {
       installPrompt = null;
+      refreshInstallButton();
       statusEl.textContent = "Battery Audit installed successfully.";
     });
     if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
       window.addEventListener("load", () => {
-        navigator.serviceWorker.register("./service-worker.js")
-          .catch(error => console.warn("Service worker registration failed", error));
+        navigator.serviceWorker.register("./service-worker.js").catch(error => {
+          console.warn("Service worker registration failed", error);
+        });
       });
     }
+    refreshInstallButton();
   </script>
 </body>
 </html>
