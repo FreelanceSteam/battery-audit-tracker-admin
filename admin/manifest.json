@@ -2,7 +2,7 @@
   "id": "./",
  
 "name": "Battery Audit Tracker Admin",
-"short_name": "Battery Admin",
+"short_name": "Battery Audit"
 "description": "Battery Audit Tracker Admin App - Designed by Nagendra Yadav",
 
   "start_url": "./",
