@@ -105,29 +105,31 @@
       }
       /* Enlarge the visible Admin button on phones while leaving desktop artwork untouched. */
       .banner-admin-link {
-        left:8%;
-        top:69.2%;
-        width:84%;
-        height:7.2%;
-        border:2px solid rgba(255,231,112,.95);
-        border-radius:18px;
+        /* Banner is 150vw wide and shifted left by 25vw.
+           These coordinates center the overlay on the visible yellow artwork button. */
+        left:22%;
+        top:69.5%;
+        width:56%;
+        height:15%;
+        border:2px solid rgba(255,231,112,.98);
+        border-radius:20px;
         color:#08295f;
-        font-size:clamp(15px,4.4vw,22px);
+        font-size:clamp(16px,4.5vw,23px);
         font-weight:900;
         letter-spacing:.2px;
         line-height:1;
-        text-shadow:0 1px 0 rgba(255,255,255,.45);
-        background:linear-gradient(180deg,#ffe86a 0%,#ffd12b 48%,#ffb900 100%);
-        box-shadow:0 5px 0 rgba(101,57,0,.42),0 0 16px rgba(255,205,34,.55),inset 0 2px 2px rgba(255,255,255,.75);
+        text-decoration:none;
+        background:linear-gradient(180deg,#ffe96b 0%,#ffd12b 52%,#ffb900 100%);
+        box-shadow:0 6px 0 rgba(101,57,0,.45),0 0 20px rgba(255,205,34,.72),inset 0 2px 3px rgba(255,255,255,.8);
         transition:transform .12s ease,filter .12s ease,box-shadow .12s ease;
       }
       .banner-admin-link::before {
         content:"↗  OPEN ADMIN APP  ›";
       }
       .banner-admin-link:active {
-        transform:scale(.96);
-        filter:brightness(.94);
-        box-shadow:0 2px 0 rgba(101,57,0,.42),0 0 24px rgba(255,224,76,.9),inset 0 2px 5px rgba(125,74,0,.2);
+        transform:scale(.94);
+        filter:brightness(.92);
+        box-shadow:0 2px 0 rgba(101,57,0,.45),0 0 28px rgba(255,224,76,1),inset 0 3px 7px rgba(125,74,0,.25);
       }
       .banner-admin-link:focus-visible {
         outline:3px solid #fff;
