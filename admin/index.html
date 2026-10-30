@@ -105,11 +105,11 @@
       }
       /* Enlarge the visible Admin button on phones while leaving desktop artwork untouched. */
       .banner-admin-link {
-        /* Narrower than the artwork: increase height only, never stretch edge-to-edge. */
+        /* Keep the button inside the artwork's original button area. */
         left:25%;
-        top:68.8%;
+        top:70%;
         width:50%;
-        height:16%;
+        height:10%;
         display:flex;
         align-items:center;
         justify-content:center;
@@ -123,8 +123,8 @@
         text-decoration:none;
         background:linear-gradient(180deg,#fff18a 0%,#ffd943 34%,#ffbf12 72%,#e99a00 100%);
         box-shadow:
-          0 7px 0 #9a5b00,
-          0 10px 17px rgba(0,12,55,.48),
+          0 6px 0 #9a5b00,
+          0 9px 15px rgba(0,12,55,.42),
           0 0 15px rgba(255,210,45,.55),
           inset 0 3px 4px rgba(255,255,255,.9),
           inset 0 -4px 5px rgba(154,91,0,.22);
@@ -136,11 +136,11 @@
         white-space:nowrap;
       }
       .banner-admin-link:active {
-        transform:translateY(5px) scale(.97);
+        transform:translateY(4px) scale(.97);
         filter:brightness(.96);
         box-shadow:
           0 2px 0 #9a5b00,
-          0 4px 9px rgba(0,12,55,.42),
+          0 4px 8px rgba(0,12,55,.4),
           0 0 22px rgba(255,224,76,.9),
           inset 0 3px 6px rgba(154,91,0,.28);
       }
