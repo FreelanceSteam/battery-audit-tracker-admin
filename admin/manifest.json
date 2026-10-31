@@ -1,27 +1,25 @@
+
 {
   "id": "./",
- 
-"name": "Battery Audit Tracker Admin",
-"short_name": "Battery Audit"
-"description": "Battery Audit Tracker Admin App - Designed by Nagendra Yadav",
-
+  "name": "Battery Audit Tracker Admin",
+  "short_name": "Battery Audit",
+  "description": "Battery Audit Tracker Admin App - Designed by Nagendra Yadav",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#0754c8",
   "theme_color": "#0754c8",
-"icons": [
-  {
-    "src": "./icons/battery-admin-192.png",
-    "sizes": "192x192",
-    "type": "image/png"
-  },
-  {
-    "src": "./icons/battery-admin-512.png",
-    "sizes": "512x512",
-    "type": "image/png"
-  }
-]
+  "icons": [
+    {
+      "src": "./icons/battery-admin-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/battery-admin-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
   ]
 }
