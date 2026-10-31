@@ -227,11 +227,27 @@
       statusEl.textContent = "Battery Audit installed successfully.";
     });
     if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker.register("./service-worker.js").catch(error => {
-          console.warn("Service worker registration failed", error);
-        });
-      });
+  window.addEventListener("load", async () => {
+    const hadController = Boolean(navigator.serviceWorker.controller);
+    let refreshing = false;
+
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (hadController && !refreshing) {
+        refreshing = true;
+        window.location.reload();
+      }
+    });
+
+    try {
+      const registration = await navigator.serviceWorker.register("./service-worker.js");
+      await registration.update();
+
+      console.log("Battery Audit auto-update check completed.");
+    } catch (error) {
+      console.warn("Service worker registration failed", error);
+    }
+  });
+}
     }
     refreshInstallButton();
   </script>
