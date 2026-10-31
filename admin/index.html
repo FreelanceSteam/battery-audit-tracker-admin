@@ -80,14 +80,15 @@
     .status:empty { display:none; }
     .status:not(:empty) { padding:4px 14px 14px; }
     @media (max-width:600px) {
-     body {
-  padding:0;
-  display:block;
-  min-height:100vh;
-  min-height:100dvh;
-  overflow-x:hidden;
-  overflow-y:auto;
-  -webkit-overflow-scrolling:touch;
+    body {
+  padding: 0;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
       .launcher {
         width:100%;
