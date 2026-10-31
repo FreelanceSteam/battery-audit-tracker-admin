@@ -80,12 +80,15 @@
     .status:empty { display:none; }
     .status:not(:empty) { padding:4px 14px 14px; }
     @media (max-width:600px) {
-      body {
-        padding:0;
-        display:grid;
-        place-items:center;
-        overflow-x:hidden;
-      }
+     body {
+  padding:0;
+  display:block;
+  min-height:100vh;
+  min-height:100dvh;
+  overflow-x:hidden;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+}
       .launcher {
         width:100%;
         max-width:none;
@@ -183,8 +186,10 @@
              window.navigator.standalone === true;
     }
     function refreshInstallButton() {
-      installButton.hidden = isInstalledMode() || !installPrompt;
-    }
+  installButton.hidden = isInstalledMode();
+  installButton.style.display = isInstalledMode() ? "none" : "";
+}
+    
     function showInstallGuidance() {
       if (/iphone|ipad|ipod/i.test(navigator.userAgent)) {
         statusEl.textContent = "Safari: tap Share, then choose Add to Home Screen.";
