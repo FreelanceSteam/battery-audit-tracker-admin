@@ -9,34 +9,48 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
-<title>Battery Audit | Technician App</title>
+<title>Battery Audit Tracker | Technician</title>
 <style>
-*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;background:radial-gradient(circle at 50% 0,#d8edff,#edf6ff 48%,#c7e1ff);color:#08285f;display:flex;align-items:center;justify-content:center;padding:22px}
-.wrap{width:min(100%,680px)}.hero{background:linear-gradient(135deg,#073b91,#087fe0 55%,#02b8e9);border:3px solid #b8edff;border-radius:28px;padding:22px 20px;text-align:center;box-shadow:0 16px 34px #063b9140,inset 0 2px 5px #fff8;color:white}
-.logo{width:156px;height:156px;object-fit:cover;border-radius:28px;border:3px solid #d9f7ff;box-shadow:0 10px 24px #001d5d88}
-h1{margin:14px 0 2px;font-size:clamp(28px,7vw,42px);font-weight:900;letter-spacing:1px;text-shadow:0 3px 0 #05245d,0 7px 12px #001a4d88}.sub{font-weight:800;letter-spacing:2px;color:#ffe27a}
-.panel{margin-top:18px;background:linear-gradient(145deg,#fff,#e8f5ff);border:2px solid white;border-radius:26px;padding:22px;box-shadow:0 14px 28px #06428a25,inset 0 1px 5px #fff}
-.row{display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap}.access{font-size:clamp(21px,5vw,28px);font-weight:900}.secure{background:#08a84d;color:white;border-radius:99px;padding:9px 14px;font-weight:800;font-size:14px}
-.desc{line-height:1.55;color:#28476e;margin:12px 0 20px}
-button{width:100%;border:0;border-radius:20px;padding:19px 16px;background:linear-gradient(180deg,#16b8ff,#0759c9 55%,#032d80);color:white;font-size:clamp(18px,4.8vw,24px);font-weight:900;letter-spacing:.4px;box-shadow:0 7px 0 #05215f,0 12px 20px #063b9145,inset 0 2px 3px #fff9;cursor:pointer}
-button:active{transform:translateY(3px);box-shadow:0 4px 0 #05215f}
-.install{margin-top:16px;background:#dff1ff;border:1px solid #a8d7ff;border-radius:18px;padding:14px;text-align:center;font-weight:800;cursor:pointer;color:#073b91}
-.foot{text-align:center;color:#31527a;font-size:12px;font-weight:800;letter-spacing:1px;margin:18px 0 4px}.credit{text-align:center;color:#073b91;font-weight:900;margin-top:7px}
-#status{font-size:13px;color:#9b2c2c;text-align:center;margin-top:10px;min-height:18px}
+:root{--navy:#062b72;--blue:#087be0;--gold:#ffc928}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;padding:18px 14px 28px;font-family:Arial,Helvetica,sans-serif;color:#08285f;background:radial-gradient(ellipse at top,#d9efff 0,#edf6ff 48%,#b9d9ff 100%);display:flex;justify-content:center;align-items:center}
+.shell{width:min(100%,760px)}
+.poster{display:block;width:100%;height:auto;max-height:44vh;object-fit:contain;border-radius:24px;filter:drop-shadow(0 14px 18px #063b9140)}
+.panel{margin:16px auto 0;background:linear-gradient(145deg,#fff 0%,#eff8ff 55%,#dceeff 100%);border:2px solid #fff;border-radius:26px;padding:clamp(18px,4vw,28px);box-shadow:0 18px 34px #073b9128,inset 0 2px 5px #fff}
+.head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+h1{margin:0;font-size:clamp(22px,5vw,30px);font-weight:900;color:var(--navy)}
+.secure{background:linear-gradient(180deg,#16c66b,#078c43);color:#fff;border-radius:999px;padding:9px 15px;font-weight:900;font-size:13px;box-shadow:0 4px 0 #056b36}
+.desc{font-size:clamp(14px,3.5vw,17px);line-height:1.55;color:#28476e;margin:14px 0 20px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+button{border:0;border-radius:18px;min-height:58px;padding:14px 12px;font-size:clamp(15px,3.8vw,18px);font-weight:900;cursor:pointer}
+.open{color:white;background:linear-gradient(180deg,#18baff,#0860cb 58%,#052f83);box-shadow:0 6px 0 #05215f,0 11px 18px #063b9140,inset 0 2px 3px #fff9}
+.install{color:#073b91;background:linear-gradient(180deg,#fff,#cfe9ff);border:2px solid #8bcaff;box-shadow:0 5px 0 #7db8e8,0 10px 16px #063b9120}
+button:active{transform:translateY(2px)}
+.status{margin:14px 0 0;text-align:center;color:#9b2c2c;font-size:13px;min-height:18px}
+.note{display:none;margin-top:14px;padding:14px 16px;background:#fff;border:1px solid #b9dcff;border-radius:16px;color:#24466f;font-size:14px;line-height:1.55}
+.note strong{color:#062b72}
+.foot{text-align:center;margin:18px 0 0;font-size:12px;letter-spacing:1px;font-weight:900;color:#31527a}
+.credit{text-align:center;margin-top:7px;font-size:16px;font-weight:900;color:#073b91}
+@media(max-width:480px){body{padding:12px 10px 22px}.poster{max-height:none;border-radius:18px}.panel{margin-top:12px;border-radius:21px}.actions{grid-template-columns:1fr}.open,.install{min-height:56px}}
 </style>
 </head>
 <body>
-<main class="wrap">
-<section class="hero">
-<img class="logo" src="./icon-512.png" alt="Battery Audit Tracker icon">
-<h1>BATTERY AUDIT</h1><div class="sub">TRACKER · TECHNICIAN APPLICATION</div>
-</section>
+<main class="shell">
+<img class="poster" src="./launcher-3d.png" alt="Battery Audit Tracker Technician Application 3D launcher design">
 <section class="panel">
-<div class="row"><div class="access">Technician Access</div><div class="secure">🔒 SECURE LINK</div></div>
-<p class="desc">Your unique technician link is ready. Open your assigned Battery Audit application using your personal access link.</p>
-<button id="openApp">⚡ &nbsp; OPEN BATTERY AUDIT &nbsp; »</button>
-<div id="installBtn" class="install" hidden>＋ &nbsp; ADD TO HOME SCREEN</div>
-<div id="status" role="status"></div>
+<div class="head"><h1>Technician Access</h1><span class="secure">🔒 SECURE LINK</span></div>
+<p class="desc">Your personal Battery Audit link is ready. Open your assigned Technician App or install Battery Audit on your mobile Home Screen for quick access.</p>
+<div class="actions">
+<button class="open" id="openApp">⚡ OPEN BATTERY AUDIT »</button>
+<button class="install" id="installApp">＋ INSTALL APP</button>
+</div>
+<div class="status" id="status" role="status"></div>
+<div class="note" id="installHelp">
+<strong>Install Battery Audit:</strong><br>
+<strong>Android / Chrome:</strong> Tap the browser menu (⋮), then choose <em>Install app</em> or <em>Add to Home screen</em>.<br><br>
+<strong>iPhone / Safari:</strong> Tap Share, then choose <em>Add to Home Screen</em>.<br><br>
+<strong>Computer / Chrome:</strong> Use the install icon in the address bar if Chrome offers it, or open the browser menu and choose <em>Install page as app</em>.
+</div>
 </section>
 <div class="foot">BATTERY AUDIT TRACKER · TECHNICIAN PORTAL</div>
 <div class="credit">Design by Nagendra Yadav</div>
@@ -49,12 +63,21 @@ if(incomingToken){try{localStorage.setItem("batteryAuditTechnicianToken",incomin
 const savedToken=(()=>{try{return localStorage.getItem("batteryAuditTechnicianToken")||""}catch(e){return ""}})();
 document.getElementById("openApp").addEventListener("click",()=>{
  const token=incomingToken||savedToken;
- if(!token){document.getElementById("status").textContent="Unique technician link/token is missing. Please open the personal link shared by your admin.";return;}
+ if(!token){document.getElementById("status").textContent="Unique technician link/token missing. Please open the personal link shared by your admin.";return;}
  location.href=APP_URL+"?token="+encodeURIComponent(token);
 });
-let installPrompt=null;const installBtn=document.getElementById("installBtn");
-window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();installPrompt=e;installBtn.hidden=false;});
-installBtn.addEventListener("click",async()=>{if(!installPrompt)return;installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;installBtn.hidden=true;});
-if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}
+let deferredPrompt=null;
+const installButton=document.getElementById("installApp");
+const help=document.getElementById("installHelp");
+window.addEventListener("beforeinstallprompt",event=>{event.preventDefault();deferredPrompt=event;});
+installButton.addEventListener("click",async()=>{
+ if(deferredPrompt){
+   deferredPrompt.prompt();
+   await deferredPrompt.userChoice;
+   deferredPrompt=null;
+ }else{
+   help.style.display=help.style.display==="block"?"none":"block";
+ }
+});
 </script>
 </body></html>
