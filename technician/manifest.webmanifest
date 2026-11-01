@@ -1,6 +1,8 @@
 {
-  "name": "Battery Audit Tracker",
+  "id": "./",
+  "name": "Battery Audit Tracker - Technician App",
   "short_name": "Battery Audit",
+  "description": "Technician application for Battery Audit Tracker",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -8,7 +10,17 @@
   "background_color": "#03143d",
   "theme_color": "#03143d",
   "icons": [
-    {"src":"./icon-192.png","sizes":"192x192","type":"image/png"},
-    {"src":"./icon-512.png","sizes":"512x512","type":"image/png"}
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
   ]
 }
