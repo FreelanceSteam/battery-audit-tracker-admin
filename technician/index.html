@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#063b91">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Battery Audit">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+<title>Battery Audit | Technician App</title>
+<style>
+*{box-sizing:border-box} body{margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;background:radial-gradient(circle at 50% 0,#d8edff,#edf6ff 48%,#c7e1ff);color:#08285f;display:flex;align-items:center;justify-content:center;padding:22px}
+.wrap{width:min(100%,680px)} .hero{background:linear-gradient(135deg,#073b91,#087fe0 55%,#02b8e9);border:3px solid #b8edff;border-radius:28px;padding:22px 20px;text-align:center;box-shadow:0 16px 34px #063b9140,inset 0 2px 5px #fff8;color:white}
+.logo{width:156px;height:156px;object-fit:cover;border-radius:28px;border:3px solid #d9f7ff;box-shadow:0 10px 24px #001d5d88}
+h1{margin:14px 0 2px;font-size:clamp(28px,7vw,42px);font-weight:900;letter-spacing:1px;text-shadow:0 3px 0 #05245d,0 7px 12px #001a4d88}
+.sub{font-weight:800;letter-spacing:2px;color:#ffe27a}
+.panel{margin-top:18px;background:linear-gradient(145deg,#fff,#e8f5ff);border:2px solid white;border-radius:26px;padding:22px;box-shadow:0 14px 28px #06428a25,inset 0 1px 5px #fff}
+.row{display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap}.access{font-size:clamp(21px,5vw,28px);font-weight:900}.secure{background:#08a84d;color:white;border-radius:99px;padding:9px 14px;font-weight:800;font-size:14px}
+.desc{line-height:1.55;color:#28476e;margin:12px 0 20px}
+button{width:100%;border:0;border-radius:20px;padding:19px 16px;background:linear-gradient(180deg,#16b8ff,#0759c9 55%,#032d80);color:white;font-size:clamp(18px,4.8vw,24px);font-weight:900;letter-spacing:.4px;box-shadow:0 7px 0 #05215f,0 12px 20px #063b9145,inset 0 2px 3px #fff9;cursor:pointer}
+button:active{transform:translateY(3px);box-shadow:0 4px 0 #05215f}
+.install{margin-top:16px;background:#dff1ff;border:1px solid #a8d7ff;border-radius:18px;padding:14px;text-align:center;font-weight:800;cursor:pointer;color:#073b91}
+.foot{text-align:center;color:#31527a;font-size:12px;font-weight:800;letter-spacing:1px;margin:18px 0 4px}.credit{text-align:center;color:#073b91;font-weight:900;margin-top:7px}
+#status{font-size:13px;color:#9b2c2c;text-align:center;margin-top:10px;min-height:18px}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <section class="hero">
+    <img class="logo" src="./assets/icon-512.png" alt="Battery Audit Tracker icon">
+    <h1>BATTERY AUDIT</h1>
+    <div class="sub">TRACKER · TECHNICIAN APPLICATION</div>
+  </section>
+  <section class="panel">
+    <div class="row"><div class="access">Technician Access</div><div class="secure">🔒 SECURE LINK</div></div>
+    <p class="desc">Your unique technician link is ready. Open your assigned Battery Audit application using your personal access link.</p>
+    <button id="openApp">⚡ &nbsp; OPEN BATTERY AUDIT &nbsp; »</button>
+    <div id="installBtn" class="install" hidden>＋ &nbsp; ADD TO HOME SCREEN</div>
+    <div id="status" role="status"></div>
+  </section>
+  <div class="foot">BATTERY AUDIT TRACKER · TECHNICIAN PORTAL</div>
+  <div class="credit">Design by Nagendra Yadav</div>
+</main>
+<script>
+const APP_URL = "https://script.google.com/macros/s/AKfycbzZjSM5-ZV8zsJiJaHnlZ-pv9L1BcUt0479nMMUNY35L6BeHXgtYsTUQ-HU6Uqxt3Vzvw/exec";
+const params = new URLSearchParams(location.search);
+const incomingToken = (params.get("token") || "").trim();
+if (incomingToken) {
+  try { localStorage.setItem("batteryAuditTechnicianToken", incomingToken); } catch(e) {}
+}
+const savedToken = (() => { try { return localStorage.getItem("batteryAuditTechnicianToken") || ""; } catch(e) { return ""; } })();
+document.getElementById("openApp").addEventListener("click", () => {
+  const token = incomingToken || savedToken;
+  if (!token) {
+    document.getElementById("status").textContent = "Unique technician link/token is missing. Please open the link shared by your admin.";
+    return;
+  }
+  location.href = APP_URL + "?token=" + encodeURIComponent(token);
+});
+let installPrompt = null;
+const installBtn = document.getElementById("installBtn");
+window.addEventListener("beforeinstallprompt", e => {
+  e.preventDefault(); installPrompt = e; installBtn.hidden = false;
+});
+installBtn.addEventListener("click", async () => {
+  if (!installPrompt) return;
+  installPrompt.prompt();
+  await installPrompt.userChoice;
+  installPrompt = null; installBtn.hidden = true;
+});
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+}
+</script>
+</body>
+</html>
