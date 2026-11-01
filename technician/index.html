@@ -7,14 +7,14 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Battery Audit">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="manifest" href="./manifest.webmanifest">
+<link rel="manifest" id="appManifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
 <title>Battery Audit Tracker | Technician</title>
 <style>
 :root{--navy:#03143d;--blue:#075ed0;--cyan:#22d9ff;--gold:#ffd22e}
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;padding:22px 14px 30px;font-family:Arial,Helvetica,sans-serif;color:#f5f9ff;background:radial-gradient(ellipse at 50% -10%,#0b4f9d 0,#061e54 42%,#020b27 100%);display:flex;justify-content:center;align-items:center}
-.shell{width:min(100%,920px)}
+body{margin:0;min-height:100vh;min-height:100svh;width:100%;padding:22px 14px 30px;font-family:Arial,Helvetica,sans-serif;color:#f5f9ff;background:radial-gradient(ellipse at 50% -10%,#0b4f9d 0,#061e54 42%,#020b27 100%);display:flex;justify-content:center;align-items:stretch}
+.shell{width:min(100%,920px);min-height:calc(100vh - 52px);min-height:calc(100svh - 52px);display:flex;flex-direction:column;justify-content:center}
 .hero{display:flex;align-items:center;gap:22px;padding:22px 26px;border:1px solid #24cfff;border-radius:26px;background:linear-gradient(115deg,#06255f,#075fc2 58%,#03194b);box-shadow:0 0 24px #08bfff55,inset 0 1px 7px #baf5ff55}
 .logo{width:clamp(94px,17vw,150px);height:clamp(94px,17vw,150px);object-fit:cover;border-radius:22px;border:2px solid #b5f4ff;box-shadow:0 0 20px #00bfff88}
 h1{margin:0;color:#ffd52e;font-size:clamp(25px,5vw,46px);font-weight:1000;line-height:1.05;text-shadow:0 3px 0 #733900,0 0 15px #ffc40055}
@@ -34,7 +34,30 @@ button:active{transform:translateY(2px)}
 .foot{text-align:center;margin:22px 0 0;font-size:12px;letter-spacing:1.4px;font-weight:900;color:#b8dcff}
 .credit{text-align:center;margin-top:9px;font-size:16px;font-weight:900;color:#ffd52e;text-shadow:0 2px 5px #000}
 .status{margin-top:14px;text-align:center;color:#ffd0d0;font-size:13px;min-height:18px}
-@media(max-width:560px){body{padding:14px 10px 24px}.hero{padding:16px;gap:14px;border-radius:20px}.logo{width:88px;height:88px;border-radius:16px}.panel{margin-top:13px;border-radius:22px}.actions{grid-template-columns:1fr}.open,.home{min-height:60px}}
+@media(max-width:560px){
+body{padding:18px 12px 26px;align-items:stretch}
+.shell{width:100%;min-height:calc(100vh - 44px);min-height:calc(100svh - 44px);justify-content:center}
+.hero{padding:22px 18px;gap:17px;border-radius:23px;min-height:132px}
+.logo{width:clamp(104px,27vw,132px);height:clamp(104px,27vw,132px);border-radius:19px;flex-shrink:0}
+h1{font-size:clamp(27px,7vw,36px)}
+.subtitle{font-size:clamp(14px,3.7vw,18px);line-height:1.35;letter-spacing:1.2px}
+.panel{margin-top:18px;padding:clamp(25px,6vw,34px) 22px;border-radius:25px;flex:0 0 auto}
+h2{font-size:clamp(27px,6.5vw,34px)}
+.secure{font-size:16px;padding:12px 19px}
+.desc{font-size:clamp(18px,4.5vw,21px);line-height:1.65;margin:20px 0 30px}
+.actions{grid-template-columns:1fr;gap:18px}
+.open,.home{min-height:76px;font-size:clamp(18px,4.5vw,22px);border-radius:22px}
+.foot{font-size:12px;line-height:1.5;margin-top:25px}
+.credit{font-size:18px;margin-top:12px}
+.status{font-size:14px}
+}
+@media(max-width:380px){
+.hero{gap:12px;padding:18px 14px}
+.logo{width:96px;height:96px}
+h1{font-size:25px}
+.subtitle{font-size:12px;letter-spacing:1px}
+.panel{padding:23px 18px}
+}
 </style>
 </head>
 <body>
@@ -44,7 +67,6 @@ button:active{transform:translateY(2px)}
 <div><h1>BATTERY AUDIT</h1><div class="subtitle">TRACKER · TECHNICIAN APPLICATION</div></div>
 </header>
 <section class="panel">
-<div class="head"><h2>Technician Access</h2><span class="secure">🔒 SECURE LINK</span></div>
 <p class="desc">Your personal Battery Audit link is ready. Open your assigned Technician App, or add Battery Audit to your mobile Home Screen for quick access.</p>
 <div class="actions">
 <button class="open" id="openApp">⚡ &nbsp; OPEN BATTERY AUDIT »</button>
@@ -52,7 +74,7 @@ button:active{transform:translateY(2px)}
 </div>
 <div class="help" id="help">
 <strong>Android (Chrome):</strong> Tap the browser menu (⋮), then choose <strong>Install app</strong> or <strong>Add to Home screen</strong>.<br><br>
-<strong>iPhone (Safari):</strong> Tap <strong>Share</strong>, scroll down, then choose <strong>Add to Home Screen</strong> and tap <strong>Add</strong>.<br><br>
+<strong>iPhone (Safari):</strong> Open this personal link in Safari, tap <strong>Share</strong>, scroll down, choose <strong>Add to Home Screen</strong>, then tap <strong>Add</strong>. Install only after opening your personal technician link.<br><br>
 The installed shortcut will use the name <strong>Battery Audit</strong> and the approved 3D app icon.
 </div>
 <div class="status" id="status" role="status"></div>
@@ -64,16 +86,70 @@ The installed shortcut will use the name <strong>Battery Audit</strong> and the 
 const APP_URL="https://script.google.com/macros/s/AKfycbzZjSM5-ZV8zsJiJaHnlZ-pv9L1BcUt0479nMMUNY35L6BeHXgtYsTUQ-HU6Uqxt3Vzvw/exec";
 const params=new URLSearchParams(location.search);
 const incomingToken=(params.get("token")||"").trim();
-if(incomingToken){try{localStorage.setItem("batteryAuditTechnicianToken",incomingToken)}catch(e){}}
-const savedToken=(()=>{try{return localStorage.getItem("batteryAuditTechnicianToken")||""}catch(e){return ""}})();
+const TOKEN_KEY="batteryAuditTechnicianToken";
+
+function readSavedToken(){
+  try{return (localStorage.getItem(TOKEN_KEY)||"").trim()}catch(e){return ""}
+}
+function saveToken(token){
+  if(!token)return;
+  try{localStorage.setItem(TOKEN_KEY,token)}catch(e){}
+  try{sessionStorage.setItem(TOKEN_KEY,token)}catch(e){}
+}
+if(incomingToken) saveToken(incomingToken);
+
+function getToken(){
+  if(incomingToken)return incomingToken;
+  try{
+    const fromSession=(sessionStorage.getItem(TOKEN_KEY)||"").trim();
+    if(fromSession)return fromSession;
+  }catch(e){}
+  return readSavedToken();
+}
+
+/* Give each technician's Home Screen installation a token-specific start URL. */
+(function setPersonalManifest(){
+  const token=getToken();
+  if(!token)return;
+  const start=new URL("./",location.href);
+  start.search="";
+  start.searchParams.set("token",token);
+  const scope=new URL("./",location.href);
+  const manifest={
+    name:"Battery Audit Tracker",
+    short_name:"Battery Audit",
+    start_url:start.href,
+    scope:scope.href,
+    display:"standalone",
+    background_color:"#03143d",
+    theme_color:"#03143d",
+    icons:[
+      {src:"./icon-192.png",sizes:"192x192",type:"image/png"},
+      {src:"./icon-512.png",sizes:"512x512",type:"image/png"}
+    ]
+  };
+  try{
+    const blob=new Blob([JSON.stringify(manifest)],{type:"application/manifest+json"});
+    const blobUrl=URL.createObjectURL(blob);
+    document.getElementById("appManifest").setAttribute("href",blobUrl);
+  }catch(e){}
+})();
+
 document.getElementById("openApp").addEventListener("click",()=>{
- const token=incomingToken||savedToken;
- if(!token){document.getElementById("status").textContent="Unique technician link/token missing. Please open the personal link shared by your admin.";return;}
- location.href=APP_URL+"?token="+encodeURIComponent(token);
+  const token=getToken();
+  if(!token){
+    document.getElementById("status").textContent="Technician token missing. Please open your personal link shared by your admin first, then add it to Home Screen.";
+    return;
+  }
+  location.href=APP_URL+"?token="+encodeURIComponent(token);
 });
 document.getElementById("addHome").addEventListener("click",()=>{
- const help=document.getElementById("help");
- help.style.display=help.style.display==="block"?"none":"block";
+  const token=getToken();
+  const help=document.getElementById("help");
+  help.style.display=help.style.display==="block"?"none":"block";
+  if(!token) document.getElementById("status").textContent="First open your personal technician link, then install Battery Audit from that page.";
+  else document.getElementById("status").textContent="Personal technician link detected. Add this page to Home Screen now.";
 });
 </script>
-</body></html>
+</body>
+</html>
