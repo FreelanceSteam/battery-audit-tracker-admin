@@ -227,42 +227,15 @@ if (technicianToken && !params.get("token")) {
   history.replaceState(null, "", personalURL.toString());
 }
 
-// Open the assigned Technician App in full-screen mode.
+// Open the assigned Technician App.
 document.getElementById("openApp").addEventListener("click", function () {
   if (!technicianToken) {
     alert("Technician token missing. Please open your personal link shared by your admin.");
     return;
   }
 
-  const overlay = document.createElement("div");
-  overlay.id = "technicianFullscreen";
-  overlay.style.cssText = `
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    height: 100dvh;
-    z-index: 999999;
-    background: #ffffff;
-    margin: 0;
-    padding: 0;
-  `;
-
-  const frame = document.createElement("iframe");
-  frame.src = APP_URL + "?token=" + encodeURIComponent(technicianToken);
-  frame.title = "Battery Audit Technician App";
-  frame.allow = "clipboard-read; clipboard-write";
-  frame.style.cssText = `
-    display: block;
-    width: 100%;
-    height: 100%;
-    border: 0;
-    margin: 0;
-    padding: 0;
-  `;
-
-  overlay.appendChild(frame);
-  document.body.appendChild(overlay);
+  window.location.href =
+    APP_URL + "?token=" + encodeURIComponent(technicianToken);
 });
 // Show installation instructions.
 document.getElementById("addHome").addEventListener("click", function () {
