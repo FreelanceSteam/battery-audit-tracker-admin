@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Battery Audit">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="manifest" href="./manifest.webmanifest">
+<link rel="manifest" id="appManifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
 <title>Battery Audit Tracker | Technician</title>
 <style>
@@ -65,7 +65,37 @@ const APP_URL="https://script.google.com/macros/s/AKfycbzZjSM5-ZV8zsJiJaHnlZ-pv9
 const params=new URLSearchParams(location.search);
 const incomingToken=(params.get("token")||"").trim();
 if(incomingToken){try{localStorage.setItem("batteryAuditTechnicianToken",incomingToken)}catch(e){}}
-const savedToken=(()=>{try{return localStorage.getItem("batteryAuditTechnicianToken")||""}catch(e){return ""}})();
+const savedToken=(()=>{try{return (localStorage.getItem("batteryAuditTechnicianToken")||"").trim()}catch(e){return ""}})();
+// Keep the personal token in the launch URL as well as local storage.
+// This is important because an installed Home Screen app may start in a
+// separate storage context from the Safari tab that installed it.
+const launchToken=incomingToken||savedToken;
+if(launchToken && !params.get("token")){
+  const launchUrl=new URL(location.href);
+  launchUrl.searchParams.set("token",launchToken);
+  history.replaceState(null,"",launchUrl.toString());
+}
+// Give install-capable browsers a per-technician start_url without changing
+// the shared static manifest or any technician's unique token.
+if(launchToken){
+  try{
+    const personalManifest={
+      id:"./?token="+encodeURIComponent(launchToken),
+      name:"Battery Audit Tracker - Technician App",
+      short_name:"Battery Audit",
+      description:"Technician application for Battery Audit Tracker",
+      start_url:"./?token="+encodeURIComponent(launchToken),
+      scope:"./", display:"standalone", orientation:"portrait",
+      background_color:"#03143d", theme_color:"#03143d",
+      icons:[
+        {src:"./icon-192.png",sizes:"192x192",type:"image/png",purpose:"any"},
+        {src:"./icon-512.png",sizes:"512x512",type:"image/png",purpose:"any"}
+      ]
+    };
+    const manifestBlob=new Blob([JSON.stringify(personalManifest)],{type:"application/manifest+json"});
+    document.getElementById("appManifest").href=URL.createObjectURL(manifestBlob);
+  }catch(e){}
+}
 document.getElementById("openApp").addEventListener("click",()=>{
  const token=incomingToken||savedToken;
  if(!token){document.getElementById("status").textContent="Unique technician link/token missing. Please open the personal link shared by your admin.";return;}
