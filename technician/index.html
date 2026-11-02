@@ -23,6 +23,15 @@ h1{margin:0;color:#ffd52e;font-size:clamp(25px,5vw,46px);font-weight:1000;line-h
 .head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
 h2{margin:0;font-size:clamp(23px,4vw,34px);color:#fff;text-shadow:0 3px 8px #0008}
 .secure{background:linear-gradient(180deg,#18d65e,#008c36);color:white;border:1px solid #a5ffb9;border-radius:999px;padding:10px 17px;font-weight:900;box-shadow:0 4px 0 #005a27,0 0 15px #00d65b66}
+  .secure{
+  display:inline-block;
+  cursor:pointer;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:14px;
+  min-height:42px;
+  appearance:none;
+  -webkit-appearance:none;
+}
 .desc{font-size:clamp(15px,2.5vw,18px);line-height:1.6;color:#e3efff;margin:16px 0 24px}
 .actions{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 button{border:0;border-radius:20px;min-height:68px;padding:16px 14px;font-size:clamp(16px,2.8vw,21px);font-weight:1000;cursor:pointer}
@@ -44,7 +53,7 @@ button:active{transform:translateY(2px)}
 <div><h1>BATTERY AUDIT</h1><div class="subtitle">TRACKER · TECHNICIAN APPLICATION</div></div>
 </header>
 <section class="panel">
-<div class="head"><h2>Technician Access</h2><span class="secure">🔒 SECURE LINK</span></div>
+<div class="head"><h2>Technician Access</h2><button type="button" class="secure" id="secureLink">🔒 SECURE LINK</button>
 <p class="desc">Your personal Battery Audit link is ready. Open your assigned Technician App, or add Battery Audit to your mobile Home Screen for quick access.</p>
 <div class="actions">
 <button class="open" id="openApp">⚡ &nbsp; OPEN BATTERY AUDIT »</button>
@@ -100,6 +109,25 @@ document.getElementById("openApp").addEventListener("click",()=>{
  const token=incomingToken||savedToken;
  if(!token){document.getElementById("status").textContent="Unique technician link/token missing. Please open the personal link shared by your admin.";return;}
  location.href=APP_URL+"?token="+encodeURIComponent(token);
+});
+  document.getElementById("secureLink").addEventListener("click", async () => {
+  const token = incomingToken || savedToken;
+  const status = document.getElementById("status");
+
+  if (!token) {
+    status.textContent = "Technician token missing. Please open your personal link first.";
+    return;
+  }
+
+  const personalLink = location.origin + location.pathname +
+    "?token=" + encodeURIComponent(token);
+
+  try {
+    await navigator.clipboard.writeText(personalLink);
+    status.textContent = "Personal Technician Link copied successfully.";
+  } catch (e) {
+    status.textContent = personalLink;
+  }
 });
 document.getElementById("addHome").addEventListener("click",()=>{
  const help=document.getElementById("help");
