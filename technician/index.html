@@ -9,6 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Battery Audit">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+  <link rel="manifest" href="./manifest.webmanifest">
 <title>Battery Audit Tracker | Technician</title>
 
 <style>
@@ -244,6 +245,18 @@ document.getElementById("addHome").addEventListener("click", function () {
     help.style.display === "block" ? "none" : "block";
 });
 </script>
-
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("./sw.js", {
+      scope: "./"
+    }).then(function (registration) {
+      console.log("Battery Audit PWA registered:", registration.scope);
+    }).catch(function (error) {
+      console.error("PWA registration failed:", error);
+    });
+  });
+}
+</script>
 </body>
 </html>
